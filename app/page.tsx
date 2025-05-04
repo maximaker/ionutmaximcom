@@ -1,0 +1,791 @@
+"use client"
+
+import Link from "next/link"
+import { Github, Linkedin, Mail, Menu, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+
+// Import trust-building components
+import { TrustBadges, ClientLogos, DetailedCaseStudy, PersonalStory } from "./components/trust-elements"
+
+// Import value-adding components
+import { FreeResourcesSection, NewsletterSignup, BlogPreview, FreeConsultationCTA } from "./components/value-elements"
+
+// Import engagement components
+import { LiveChatButton, ProjectCalculator } from "./components/engagement-elements"
+
+// Import UI enhancement components
+import {
+  CustomCursor,
+  BackToTop,
+  ThemeToggle,
+  AnimatedSection,
+  ParallaxBackground,
+  LazyImage,
+  GlassCard,
+  SkipToContent,
+} from "./components/ui-enhancements"
+
+// Import micro-interactions components
+import { ToastManager, ScrollIndicator } from "./components/micro-interactions"
+
+// Import form components
+import { EnhancedInput, EnhancedTextarea, EnhancedSubmitButton } from "./components/enhanced-form"
+
+// Import advanced interactions
+import {
+  MagneticElement,
+  CharacterReveal,
+  SmoothScrollLink,
+  SpotlightCursor,
+  AnimatedUnderline,
+  StaggeredFadeIn,
+  AnimatedGradientText,
+  ScrollProgressBar,
+  SmoothCounter,
+  Card3D,
+  RippleButton,
+  AnimatedMenuIcon,
+  AnimatedDivider,
+} from "./components/advanced-interactions"
+
+// Import section components
+import { ServicesSection } from "./components/sections/services-section"
+import { ResultsSection } from "./components/sections/results-section"
+import { TestimonialsSection } from "./components/sections/testimonials-section"
+import { SectionLayout } from "./components/section-layout"
+
+// Update the main container to use our new spacing classes
+export default function LandingPage() {
+  return (
+    <div className="min-h-screen text-foreground flex flex-col theme-transition">
+      <SkipToContent />
+      <CustomCursor />
+      <ScrollProgressBar />
+      <SpotlightCursor />
+      <ParallaxBackground />
+      <Header />
+      <main id="main-content" className="flex-1 content-spacing-lg">
+        <HeroSection />
+        <ClientsSection />
+        <ResultsSection />
+        <ServicesSection />
+        <TestimonialsSection />
+        <CaseStudySection />
+        <ProjectsSection />
+        <ProcessSection />
+        <ResourcesSection />
+        <CalculatorSection />
+        <FAQSectionComponent />
+        <FreeConsultationSection />
+        <ContactSection />
+      </main>
+      <Footer />
+      <LiveChatButton />
+      <BackToTop />
+      <ThemeToggle />
+      <ToastManager />
+      <ScrollIndicator />
+    </div>
+  )
+}
+
+function Header() {
+  const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState("")
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+
+      // Determine active section
+      const sections = ["services", "projects", "resources", "contact"]
+      const currentSection = sections.find((section) => {
+        const elementCheck = document.getElementById(section)
+        if (!elementCheck) return false
+
+        const rect = elementCheck.getBoundingClientRect()
+        return rect.top <= 100 && rect.bottom >= 100
+      })
+
+      if (currentSection) {
+        setActiveSection(currentSection)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  return (
+    <header
+      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+        scrolled
+          ? "border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container flex h-20 items-center justify-between">
+        <Link href="/" className="font-light text-xl tracking-wider text-foreground group">
+          <motion.span className="inline-block" whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
+            ionut
+          </motion.span>
+          <motion.span
+            className="text-accent inline-block"
+            whileHover={{ x: 5 }}
+            transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
+          >
+            maxim
+          </motion.span>
+        </Link>
+        <nav className="hidden md:flex gap-8">
+          {[
+            { name: "Services", href: "#services" },
+            { name: "Work", href: "#projects" },
+            { name: "Resources", href: "#resources" },
+            { name: "Contact", href: "#contact" },
+          ].map((item) => (
+            <SmoothScrollLink
+              key={item.name}
+              to={item.href}
+              className={`text-sm font-light tracking-wider relative ${
+                activeSection === item.href.substring(1)
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <AnimatedUnderline>{item.name}</AnimatedUnderline>
+            </SmoothScrollLink>
+          ))}
+        </nav>
+        <div className="hidden md:block">
+          <RippleButton className="btn-primary rounded-none font-light tracking-wider px-6 h-10 relative overflow-hidden group">
+            <SmoothScrollLink to="#contact" className="block">
+              <span className="relative z-10">Get a Quote</span>
+              <span className="absolute inset-0 bg-accent/80 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+            </SmoothScrollLink>
+          </RippleButton>
+        </div>
+        <div className="md:hidden">
+          <AnimatedMenuIcon isOpen={isMenuOpen} toggle={() => setIsMenuOpen(!isMenuOpen)} />
+        </div>
+      </div>
+    </header>
+  )
+}
+
+function MobileNav() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <div className="md:hidden">
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setIsOpen(true)}
+        aria-label="Open Menu"
+        className="text-foreground hover:bg-background/10 rounded-full w-10 h-10"
+      >
+        <Menu className="h-5 w-5" />
+      </Button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-background"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="container flex h-20 items-center justify-between">
+              <Link href="/" className="font-light text-xl tracking-wider text-foreground">
+                ionut<span className="text-accent">maxim</span>
+              </Link>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsOpen(false)}
+                aria-label="Close Menu"
+                className="text-foreground hover:bg-background/10 rounded-full w-10 h-10"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            <motion.nav
+              className="container grid gap-8 py-12"
+              initial="closed"
+              animate="open"
+              variants={{
+                open: { transition: { staggerChildren: 0.1 } },
+                closed: {},
+              }}
+            >
+              {[
+                { name: "Services", href: "#services" },
+                { name: "Work", href: "#projects" },
+                { name: "Resources", href: "#resources" },
+                { name: "Contact", href: "#contact" },
+              ].map((item) => (
+                <motion.div
+                  key={item.name}
+                  variants={{
+                    open: { opacity: 1, y: 0 },
+                    closed: { opacity: 0, y: 20 },
+                  }}
+                >
+                  <SmoothScrollLink
+                    to={item.href}
+                    className="text-2xl font-extralight tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <AnimatedUnderline>{item.name}</AnimatedUnderline>
+                  </SmoothScrollLink>
+                </motion.div>
+              ))}
+              <motion.div
+                variants={{
+                  open: { opacity: 1, y: 0 },
+                  closed: { opacity: 0, y: 20 },
+                }}
+                className="pt-8"
+              >
+                <RippleButton
+                  className="btn-primary rounded-none font-light tracking-wider px-6 py-6 h-auto w-full"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <SmoothScrollLink to="#contact" className="block">
+                    Get a Quote
+                  </SmoothScrollLink>
+                </RippleButton>
+              </motion.div>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function HeroSection() {
+  return (
+    <section className="container section-spacing-lg flex items-center min-h-[90vh] relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/5 blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-accent/5 blur-3xl"></div>
+
+      <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center relative z-10">
+        <AnimatedSection className="space-y-8">
+          <motion.div
+            className="badge"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            DESIGN & DEVELOPMENT
+          </motion.div>
+          <h1 className="heading-1 leading-tight">
+            <CharacterReveal text="Elevating digital" delay={0.3} />
+            <br />
+            <CharacterReveal text="experiences with" delay={0.6} />
+            <br />
+            <AnimatedGradientText text="purpose" className="heading-1" />
+          </h1>
+          <motion.p
+            className="text-body-lg max-w-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            I help brands stand out in the digital landscape through strategic design and development that drives
+            results.
+          </motion.p>
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <MagneticElement strength={20}>
+              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-8 py-6 h-auto relative overflow-hidden group">
+                <SmoothScrollLink to="#contact" className="flex items-center">
+                  <span className="relative z-10">Get Started</span>
+                  <motion.span
+                    className="inline-block ml-2 relative z-10"
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    →
+                  </motion.span>
+                  <span className="absolute inset-0 bg-accent/80 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+                </SmoothScrollLink>
+              </RippleButton>
+            </MagneticElement>
+            <RippleButton className="btn-outline rounded-none font-light tracking-wider px-8 py-6 h-auto">
+              <SmoothScrollLink to="#projects">View My Work</SmoothScrollLink>
+            </RippleButton>
+          </motion.div>
+          <motion.div
+            className="pt-4 flex items-center gap-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            <div className="flex -space-x-2">
+              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-xs">5.0</div>
+              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
+              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
+              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
+            </div>
+            <span className="text-muted-foreground text-sm">
+              Based on <SmoothCounter value={20} suffix="+" className="text-accent" /> client reviews
+            </span>
+          </motion.div>
+        </AnimatedSection>
+        <AnimatedSection className="relative aspect-square">
+          <Card3D className="w-full h-full" intensity={5}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <LazyImage
+                src="/placeholder.svg?height=600&width=600"
+                alt="Digital Experience Design"
+                width={600}
+                height={600}
+                className="object-cover rounded-sm border border-border"
+              />
+              <GlassCard className="absolute -bottom-6 -left-6 p-4 backdrop-blur-sm border border-border shadow-lg">
+                <p className="text-foreground font-light text-sm">
+                  <span className="text-accent block mb-1">8+ Years Experience</span>
+                  Delivering exceptional digital solutions
+                </p>
+              </GlassCard>
+            </motion.div>
+          </Card3D>
+        </AnimatedSection>
+      </div>
+    </section>
+  )
+}
+
+function ClientsSection() {
+  return (
+    <SectionLayout
+      title="Trusted Partners"
+      subtitle="Innovative brands worldwide rely on my expertise to elevate their digital presence."
+      divider
+    >
+      <div className="space-y-12">
+        <ClientLogos />
+        <TrustBadges />
+      </div>
+    </SectionLayout>
+  )
+}
+
+function CaseStudySection() {
+  return (
+    <SectionLayout
+      badge="CASE STUDY"
+      title="Real results for real clients"
+      subtitle="See how my strategic approach delivers measurable outcomes for businesses."
+      divider
+    >
+      <div className="space-y-16">
+        <DetailedCaseStudy />
+        <AnimatedDivider />
+        <PersonalStory />
+      </div>
+    </SectionLayout>
+  )
+}
+
+function ProjectsSection() {
+  const projects = [
+    {
+      title: "E-commerce Redesign",
+      description: "A complete overhaul of an e-commerce platform resulting in 35% higher conversion rate.",
+      tags: ["UI/UX Design", "Web Development", "Conversion Optimization"],
+      image: "/placeholder.svg?height=400&width=600",
+      results: "+35% Conversions",
+    },
+    {
+      title: "Brand Identity System",
+      description: "Comprehensive brand identity for a tech startup that helped secure Series A funding.",
+      tags: ["Branding", "Visual Identity", "Strategy"],
+      image: "/placeholder.svg?height=400&width=600",
+      results: "Series A Funded",
+    },
+    {
+      title: "SaaS Platform UI",
+      description: "User interface design for a SaaS platform that improved user retention by 40%.",
+      tags: ["UI Design", "User Experience", "Product Design"],
+      image: "/placeholder.svg?height=400&width=600",
+      results: "+40% Retention",
+    },
+  ]
+
+  return (
+    <SectionLayout
+      id="projects"
+      badge="FEATURED WORK"
+      title="Projects that drive results"
+      subtitle="A selection of projects that showcase my approach to solving business challenges through design."
+      divider
+    >
+      <div className="relative">
+        {/* Background decorative elements */}
+        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-accent/5 blur-3xl -z-10"></div>
+
+        <StaggeredFadeIn className="grid gap-16" staggerDelay={0.2}>
+          {projects.map((project, index) => (
+            <Card3D key={index} className="h-full">
+              <div className="group relative overflow-hidden border-b border-border hover:border-accent/30 transition-colors pb-8 h-full">
+                <div className="aspect-video overflow-hidden mb-6 relative">
+                  <div className="absolute top-4 right-4 z-10 bg-accent px-3 py-1 text-xs font-light tracking-wider text-accent-foreground">
+                    {project.results}
+                  </div>
+                  <LazyImage
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    width={600}
+                    height={400}
+                    className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                  />
+                </div>
+                <h3 className="heading-3 mb-3 group-hover:text-accent transition-colors">{project.title}</h3>
+                <p className="text-body mb-6">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className="bg-card/50 text-muted-foreground text-xs px-3 py-1 border border-border group-hover:border-border/50 transition-colors"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <motion.div
+                  className="absolute bottom-0 left-0 h-px bg-accent"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
+            </Card3D>
+          ))}
+        </StaggeredFadeIn>
+
+        <div className="mt-16 flex justify-center">
+          <RippleButton className="btn-outline rounded-none font-light tracking-wider px-8 py-6 h-auto">
+            <Link href="#" className="group-hover:text-accent transition-colors flex items-center">
+              View all projects
+              <motion.span
+                className="inline-block ml-2"
+                initial={{ x: 0 }}
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                →
+              </motion.span>
+            </Link>
+          </RippleButton>
+        </div>
+      </div>
+    </SectionLayout>
+  )
+}
+
+function ProcessSection() {
+  const steps = [
+    {
+      number: "01",
+      title: "Discovery",
+      description: "I start by understanding your business goals, target audience, and project requirements.",
+    },
+    {
+      number: "02",
+      title: "Strategy",
+      description: "Based on research, I develop a strategic approach to achieve your specific objectives.",
+    },
+    {
+      number: "03",
+      title: "Design",
+      description: "I create user-centered designs that align with your brand and engage your audience.",
+    },
+    {
+      number: "04",
+      title: "Development",
+      description: "The designs are transformed into fully functional, responsive, and optimized websites.",
+    },
+    {
+      number: "05",
+      title: "Testing",
+      description: "Rigorous testing ensures everything works flawlessly across all devices and browsers.",
+    },
+    {
+      number: "06",
+      title: "Launch",
+      description: "Your project goes live with ongoing support to ensure continued success.",
+    },
+  ]
+
+  return (
+    <SectionLayout
+      id="process"
+      badge="PROCESS"
+      title="How we'll work together"
+      subtitle="A structured approach ensures your project is completed efficiently and meets all objectives."
+      divider
+    >
+      <div className="relative z-10">
+        <StaggeredFadeIn className="grid gap-8" staggerDelay={0.1}>
+          {steps.map((step, index) => (
+            <Card3D key={index} className="h-full">
+              <div className="card-style py-4 h-full">
+                <div className="text-accent text-4xl font-light mb-4">{step.number}</div>
+                <h3 className="heading-3 mb-3">{step.title}</h3>
+                <p className="text-body">{step.description}</p>
+              </div>
+            </Card3D>
+          ))}
+        </StaggeredFadeIn>
+
+        <div className="mt-16">
+          <Card3D>
+            <GlassCard className="p-8 text-center">
+              <h3 className="heading-3 mb-4">Ready to start your project?</h3>
+              <p className="text-body mb-6 max-w-xl mx-auto">
+                Let's discuss how I can help you achieve your business goals through strategic design and development.
+              </p>
+              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-8 py-4 h-auto relative overflow-hidden group">
+                <SmoothScrollLink to="#contact" className="block">
+                  <span className="relative z-10">Schedule a Consultation</span>
+                  <span className="absolute inset-0 bg-accent/80 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+                </SmoothScrollLink>
+              </RippleButton>
+            </GlassCard>
+          </Card3D>
+        </div>
+      </div>
+    </SectionLayout>
+  )
+}
+
+function ResourcesSection() {
+  return (
+    <SectionLayout
+      id="resources"
+      badge="RESOURCES"
+      title="Free resources & insights"
+      subtitle="Valuable content to help you improve your digital presence and achieve better results."
+      divider
+    >
+      <div className="space-y-16">
+        <FreeResourcesSection />
+        <AnimatedDivider />
+        <BlogPreview />
+        <AnimatedDivider />
+        <NewsletterSignup />
+      </div>
+    </SectionLayout>
+  )
+}
+
+function CalculatorSection() {
+  return (
+    <SectionLayout
+      badge="PROJECT ESTIMATOR"
+      title="Get a quick estimate"
+      subtitle="Use this interactive tool to get a rough estimate for your project. For a detailed quote, contact me directly."
+      divider
+    >
+      <ProjectCalculator />
+    </SectionLayout>
+  )
+}
+
+function FAQSectionComponent() {
+  const faqs = [
+    {
+      question: "What is your typical project timeline?",
+      answer:
+        "Project timelines vary based on scope and complexity. A typical website design and development project takes 4-8 weeks from start to finish. During our initial consultation, I'll provide a more accurate timeline based on your specific requirements.",
+    },
+    {
+      question: "How do you price your services?",
+      answer:
+        "Pricing depends on the project's complexity and the resources required. I offer customized quotes after discussing your needs in detail. Factors include design complexity, development hours, and any additional services.",
+    },
+    {
+      question: "What is your design process?",
+      answer:
+        "My design process involves understanding your goals, conducting research, creating wireframes and prototypes, and refining the design based on your feedback. I ensure the final product aligns with your brand and meets user needs.",
+    },
+    {
+      question: "What kind of support do you offer after launch?",
+      answer:
+        "I provide ongoing support to ensure your website runs smoothly. This includes bug fixes, content updates, and technical assistance. I also offer maintenance packages for long-term support and updates.",
+    },
+    {
+      question: "How do you handle revisions and feedback?",
+      answer:
+        "I value your feedback and offer multiple revision rounds to ensure you're satisfied with the final product. I'm committed to making the necessary adjustments to meet your expectations.",
+    },
+  ]
+
+  return (
+    <SectionLayout
+      id="faq"
+      badge="FAQ"
+      title="Frequently asked questions"
+      subtitle="Answers to common questions about my services, process, and approach to design and development."
+      divider
+    >
+      <StaggeredFadeIn className="grid gap-8" staggerDelay={0.1}>
+        {faqs.map((faq, index) => (
+          <Card3D key={index} className="h-full">
+            <div className="card-style py-4 h-full">
+              <h3 className="heading-3 mb-3">{faq.question}</h3>
+              <p className="text-body">{faq.answer}</p>
+            </div>
+          </Card3D>
+        ))}
+      </StaggeredFadeIn>
+    </SectionLayout>
+  )
+}
+
+function FreeConsultationSection() {
+  return (
+    <SectionLayout
+      id="consultation"
+      badge="CONSULTATION"
+      title="Get a free consultation"
+      subtitle="Discuss your project with me and get expert advice on how to achieve your business goals through strategic design and development."
+      divider
+    >
+      <FreeConsultationCTA />
+    </SectionLayout>
+  )
+}
+
+function ContactSection() {
+  return (
+    <SectionLayout
+      id="contact"
+      badge="CONTACT"
+      title="Let's bring your vision to life"
+      subtitle="Ready to discuss your project? Contact me today to schedule a consultation and get a customized quote."
+    >
+      <ContactForm />
+    </SectionLayout>
+  )
+}
+
+function ContactForm() {
+  return (
+    <div className="grid gap-8">
+      <AnimatedSection className="space-y-6">
+        <h3 className="heading-3 mb-4">Contact Information</h3>
+        <p className="text-body">
+          Feel free to reach out with any questions or project inquiries. I'm always open to discussing new
+          opportunities and collaborations.
+        </p>
+        <div className="space-y-2">
+          <p className="text-body flex items-center gap-2">
+            <Mail className="h-5 w-5 text-muted-foreground" />
+            <a href="mailto:ionut@example.com">ionut@example.com</a>
+          </p>
+          <p className="text-body flex items-center gap-2">
+            <Linkedin className="h-5 w-5 text-muted-foreground" />
+            <a href="https://linkedin.com/in/ionutmaxim">linkedin.com/in/ionutmaxim</a>
+          </p>
+          <p className="text-body flex items-center gap-2">
+            <Github className="h-5 w-5 text-muted-foreground" />
+            <a href="https://github.com/ionutmaxim">github.com/ionutmaxim</a>
+          </p>
+        </div>
+      </AnimatedSection>
+      <AnimatedSection>
+        <form className="grid gap-4">
+          <EnhancedInput label="Name" type="text" placeholder="Your Name" />
+          <EnhancedInput label="Email" type="email" placeholder="Your Email" />
+          <EnhancedTextarea label="Message" placeholder="Your Message" />
+          <EnhancedSubmitButton>Send Message</EnhancedSubmitButton>
+        </form>
+      </AnimatedSection>
+    </div>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="container section-spacing-lg border-t border-border">
+      <div className="grid md:grid-cols-3 gap-8 py-12">
+        <div className="space-y-4">
+          <Link href="/" className="font-light text-xl tracking-wider text-foreground">
+            ionut<span className="text-accent">maxim</span>
+          </Link>
+          <p className="text-body">Strategic design and development to elevate your brand and drive results.</p>
+        </div>
+        <div className="grid grid-cols-2 gap-8 md:col-span-2">
+          <div className="space-y-4">
+            <h4 className="heading-4">Navigation</h4>
+            <ul className="space-y-2">
+              <li>
+                <SmoothScrollLink to="#services" className="text-body hover:text-foreground transition-colors">
+                  Services
+                </SmoothScrollLink>
+              </li>
+              <li>
+                <SmoothScrollLink to="#projects" className="text-body hover:text-foreground transition-colors">
+                  Work
+                </SmoothScrollLink>
+              </li>
+              <li>
+                <SmoothScrollLink to="#resources" className="text-body hover:text-foreground transition-colors">
+                  Resources
+                </SmoothScrollLink>
+              </li>
+              <li>
+                <SmoothScrollLink to="#contact" className="text-body hover:text-foreground transition-colors">
+                  Contact
+                </SmoothScrollLink>
+              </li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h4 className="heading-4">Connect</h4>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="https://linkedin.com/in/ionutmaxim"
+                  className="text-body hover:text-foreground transition-colors"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/ionutmaxim" className="text-body hover:text-foreground transition-colors">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a href="mailto:ionut@example.com" className="text-body hover:text-foreground transition-colors">
+                  Email
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="text-center text-muted-foreground text-sm py-4">
+        © {new Date().getFullYear()} Ionut Maxim. All rights reserved.
+      </div>
+    </footer>
+  )
+}
