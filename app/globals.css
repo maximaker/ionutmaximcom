@@ -196,7 +196,7 @@ a:focus-visible {
 /* Card styles */
 .card-style {
   transition: transform 0.3s ease, border-color 0.3s ease;
-  @apply bg-transparent border-l-2 border-l-accent/20 pl-8 rounded-none shadow-none hover:border-l-accent;
+  @apply bg-transparent border-l-2 border-l-accent/20 pl-8 rounded-none shadow-none hover:border-l-accent mb-8;
 }
 
 .card-style:hover {
@@ -218,15 +218,15 @@ a:focus-visible {
 
 /* Consistent spacing - INCREASED FOR AIRINESS */
 .section-spacing {
-  @apply py-24 md:py-32;
+  @apply py-28 md:py-36;
 }
 
 .section-spacing-lg {
-  @apply py-32 md:py-40;
+  @apply py-36 md:py-44;
 }
 
 .section-spacing-xl {
-  @apply py-36 md:py-48;
+  @apply py-40 md:py-52;
 }
 
 /* Consistent container padding */
@@ -236,21 +236,21 @@ a:focus-visible {
 
 /* Consistent heading styles - ENHANCED VISUAL HIERARCHY */
 .heading-1 {
-  @apply text-5xl md:text-6xl lg:text-7xl font-light tracking-wide text-foreground leading-tight;
+  @apply text-5xl md:text-6xl lg:text-7xl font-light tracking-wide text-foreground leading-tight mb-8;
   letter-spacing: -0.02em;
 }
 
 .heading-2 {
-  @apply text-4xl md:text-5xl font-light tracking-wide text-foreground leading-tight;
+  @apply text-4xl md:text-5xl font-light tracking-wide text-foreground leading-tight mb-6;
   letter-spacing: -0.01em;
 }
 
 .heading-3 {
-  @apply text-2xl md:text-3xl font-light tracking-wide text-foreground leading-tight;
+  @apply text-2xl md:text-3xl font-light tracking-wide text-foreground leading-tight mb-4;
 }
 
 .heading-4 {
-  @apply text-xl font-light tracking-wide text-foreground;
+  @apply text-xl font-light tracking-wide text-foreground mb-3;
 }
 
 /* Badge styles - REDUCED VISUAL IMPACT */
@@ -293,7 +293,7 @@ a:focus-visible {
 
 /* Consistent section dividers */
 .section-divider {
-  @apply border-t border-border/30 pt-12 md:pt-16;
+  @apply border-t border-border/30 pt-16 md:pt-20 mt-16 md:mt-20;
 }
 
 /* Add these animation keyframes at the end of the file */
@@ -420,15 +420,15 @@ a:not(.btn-primary):not(.btn-secondary):not(.btn-outline):hover {
 
 /* Add these new spacing utility classes for better visual hierarchy */
 .content-spacing-sm {
-  @apply space-y-6;
+  @apply space-y-8;
 }
 
 .content-spacing-md {
-  @apply space-y-12;
+  @apply space-y-16;
 }
 
 .content-spacing-lg {
-  @apply space-y-16;
+  @apply space-y-24;
 }
 
 /* Section layout specific styles */
@@ -448,7 +448,8 @@ a:not(.btn-primary):not(.btn-secondary):not(.btn-outline):hover {
 
 /* Enhanced paragraph spacing */
 p {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.8em;
+  max-width: 70ch;
 }
 
 /* Improved list spacing */
@@ -473,7 +474,7 @@ li {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(var(--background), 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -550,4 +551,21 @@ li {
 /* Resource icons */
 .resource-icon {
   @apply h-12 w-12 text-accent mb-6;
+}
+
+/* Add this to ensure main content is visible */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure sections have proper z-index */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix for background elements that might be covering content */
+.absolute {
+  z-index: 0;
 }

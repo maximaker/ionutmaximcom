@@ -54,17 +54,17 @@ export function SectionLayout({
       ref={sectionRef}
       className={`container ${divider ? "section-divider" : ""} section-spacing-xl ${className} ${isInView ? "section-in-view" : ""}`}
     >
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 lg:gap-24">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20 lg:gap-28">
         <AnimatedSection className="md:sticky md:top-32 self-start">
           <div className="content-spacing-md text-left">
-            {badge && <div className="badge mb-6">{badge}</div>}
-            <h2 className={`heading-2 mb-6 section-title ${isInView ? "opacity-100" : "opacity-70"}`}>{title}</h2>
-            {subtitle && <p className="text-body-lg">{subtitle}</p>}
+            {badge && <div className="badge mb-8">{badge}</div>}
+            <h2 className={`heading-2 mb-8 section-title ${isInView ? "opacity-100" : "opacity-50"}`}>{title}</h2>
+            {subtitle && <p className="text-body-lg max-width-prose">{subtitle}</p>}
           </div>
         </AnimatedSection>
 
         <AnimatedSection className="md:col-span-2">
-          <div className="text-left space-y-12 content-visible">{children}</div>
+          <div className="text-left space-y-16 content-visible">{children}</div>
         </AnimatedSection>
       </div>
     </section>

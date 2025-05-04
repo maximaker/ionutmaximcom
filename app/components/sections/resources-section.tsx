@@ -60,13 +60,13 @@ function FreeResourcesSection() {
     <div className="space-y-12">
       <h3 className="heading-3 mb-8">Free Resources</h3>
       <div className="resources-grid">
-        <StaggeredFadeIn className="grid md:grid-cols-2 gap-12" staggerDelay={0.2}>
+        <StaggeredFadeIn className="grid md:grid-cols-2 gap-16" staggerDelay={0.2}>
           {resources.map((resource, index) => (
             <Card3D key={index} className="h-full">
               <div className="resources-card card-style h-full group">
                 <resource.icon className="resource-icon" />
-                <h4 className="heading-4 mb-4 group-hover:text-accent transition-colors">{resource.title}</h4>
-                <p className="text-body mb-6">{resource.description}</p>
+                <h4 className="heading-4 mb-6 group-hover:text-accent transition-colors">{resource.title}</h4>
+                <p className="text-body mb-8">{resource.description}</p>
                 <Link
                   href={resource.link}
                   className="flex items-center gap-2 text-accent font-light hover:text-accent/80 transition-colors"

@@ -69,7 +69,7 @@ export default function LandingPage() {
       <SpotlightCursor />
       <ParallaxBackground />
       <Header />
-      <main id="main-content" className="flex-1 content-spacing-lg">
+      <main id="main-content" className="flex-1 content-spacing-lg relative z-10">
         <HeroSection />
         <ClientsSection />
         <ResultsSection />
