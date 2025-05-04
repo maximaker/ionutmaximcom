@@ -73,11 +73,21 @@
   body {
     @apply bg-background text-foreground transition-colors duration-300;
     line-height: 1.7;
+    /* Fix for content visibility */
+    overflow-x: hidden;
+    position: relative;
   }
 
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Fix for z-index stacking context */
+  main,
+  section,
+  div {
+    position: relative;
   }
 }
 
@@ -180,13 +190,13 @@ a:focus-visible {
 
 /* Glass effect */
 .glass-effect {
-  @apply bg-background/30 backdrop-blur-sm border-l-2 border-l-accent/40 pl-8 shadow-none;
+  @apply bg-background/30 backdrop-blur-sm border-l-2 border-l-accent/20 pl-8 shadow-none;
 }
 
 /* Card styles */
 .card-style {
   transition: transform 0.3s ease, border-color 0.3s ease;
-  @apply bg-transparent border-l-2 border-l-accent/40 pl-8 rounded-none shadow-none hover:border-l-accent;
+  @apply bg-transparent border-l-2 border-l-accent/20 pl-8 rounded-none shadow-none hover:border-l-accent;
 }
 
 .card-style:hover {
@@ -243,9 +253,19 @@ a:focus-visible {
   @apply text-xl font-light tracking-wide text-foreground;
 }
 
-/* Badge styles */
+/* Badge styles - REDUCED VISUAL IMPACT */
 .badge {
-  @apply inline-block px-4 py-1 bg-accent/10 border border-accent/30 text-accent text-sm tracking-wider;
+  @apply inline-block px-4 py-1 bg-accent/5 border border-accent/20 text-accent/70 text-sm tracking-wider;
+}
+
+/* Section title styles - REDUCED VISUAL IMPACT WHEN NOT IN FOCUS */
+.section-title {
+  @apply opacity-70 transition-opacity duration-300;
+}
+
+.section-title:hover,
+.section-in-view .section-title {
+  @apply opacity-100;
 }
 
 /* Consistent text styles */
@@ -447,4 +467,87 @@ li {
 .btn-secondary,
 .btn-outline {
   @apply px-8 py-4 text-base;
+}
+
+/* Modal overlay styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(var(--background), 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.modal-content {
+  @apply bg-card border border-border shadow-lg max-w-lg w-full p-8 relative;
+}
+
+/* Resources section - less crowded */
+.resources-grid {
+  @apply grid gap-16;
+}
+
+.resources-card {
+  @apply p-8 space-y-6;
+}
+
+/* Fix for z-index issues */
+.z-0 {
+  z-index: 0;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-20 {
+  z-index: 20;
+}
+.z-30 {
+  z-index: 30;
+}
+.z-40 {
+  z-index: 40;
+}
+.z-50 {
+  z-index: 50;
+}
+.z-60 {
+  z-index: 60;
+}
+.z-70 {
+  z-index: 70;
+}
+.z-80 {
+  z-index: 80;
+}
+.z-90 {
+  z-index: 90;
+}
+.z-100 {
+  z-index: 100;
+}
+
+/* Fix for content visibility */
+.content-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Fix for cursor issues */
+.custom-cursor {
+  z-index: 9999 !important;
+  pointer-events: none !important;
+}
+
+/* Ensure modals and overlays don't interfere with cursor */
+.modal-overlay * {
+  cursor: auto !important;
+}
+
+/* Resource icons */
+.resource-icon {
+  @apply h-12 w-12 text-accent mb-6;
 }

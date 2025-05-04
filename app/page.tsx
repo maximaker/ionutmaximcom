@@ -10,10 +10,10 @@ import { motion, AnimatePresence } from "framer-motion"
 import { TrustBadges, ClientLogos, DetailedCaseStudy, PersonalStory } from "./components/trust-elements"
 
 // Import value-adding components
-import { FreeResourcesSection, NewsletterSignup, BlogPreview, FreeConsultationCTA } from "./components/value-elements"
+import { FreeConsultationCTA } from "./components/value-elements"
 
 // Import engagement components
-import { LiveChatButton, ProjectCalculator } from "./components/engagement-elements"
+import { LiveChatButton } from "./components/engagement-elements"
 
 // Import UI enhancement components
 import {
@@ -54,7 +54,10 @@ import {
 import { ServicesSection } from "./components/sections/services-section"
 import { ResultsSection } from "./components/sections/results-section"
 import { TestimonialsSection } from "./components/sections/testimonials-section"
+import { ResourcesSection } from "./components/sections/resources-section"
 import { SectionLayout } from "./components/section-layout"
+import { FAQSection } from "./components/faq-section"
+import { CalculatorSection } from "./components/calculator-section"
 
 // Update the main container to use our new spacing classes
 export default function LandingPage() {
@@ -77,7 +80,7 @@ export default function LandingPage() {
         <ProcessSection />
         <ResourcesSection />
         <CalculatorSection />
-        <FAQSectionComponent />
+        <FAQSection />
         <FreeConsultationSection />
         <ContactSection />
       </main>
@@ -161,12 +164,22 @@ function Header() {
           ))}
         </nav>
         <div className="hidden md:block">
-          <RippleButton className="btn-primary rounded-none font-light tracking-wider px-6 h-10 relative overflow-hidden group">
-            <SmoothScrollLink to="#contact" className="block">
-              <span className="relative z-10">Get a Quote</span>
-              <span className="absolute inset-0 bg-accent/80 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
-            </SmoothScrollLink>
-          </RippleButton>
+          <MagneticElement strength={20}>
+            <RippleButton className="btn-primary rounded-none font-light tracking-wider px-6 py-2 h-auto relative overflow-hidden group">
+              <SmoothScrollLink to="#contact" className="flex items-center">
+                <span className="relative z-10">Get a Quote</span>
+                <motion.span
+                  className="inline-block ml-2 relative z-10"
+                  initial={{ x: 0 }}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  →
+                </motion.span>
+                <span className="absolute inset-0 bg-accent/80 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+              </SmoothScrollLink>
+            </RippleButton>
+          </MagneticElement>
         </div>
         <div className="md:hidden">
           <AnimatedMenuIcon isOpen={isMenuOpen} toggle={() => setIsMenuOpen(!isMenuOpen)} />
@@ -575,89 +588,6 @@ function ProcessSection() {
   )
 }
 
-function ResourcesSection() {
-  return (
-    <SectionLayout
-      id="resources"
-      badge="RESOURCES"
-      title="Free resources & insights"
-      subtitle="Valuable content to help you improve your digital presence and achieve better results."
-      divider
-    >
-      <div className="space-y-16">
-        <FreeResourcesSection />
-        <AnimatedDivider />
-        <BlogPreview />
-        <AnimatedDivider />
-        <NewsletterSignup />
-      </div>
-    </SectionLayout>
-  )
-}
-
-function CalculatorSection() {
-  return (
-    <SectionLayout
-      badge="PROJECT ESTIMATOR"
-      title="Get a quick estimate"
-      subtitle="Use this interactive tool to get a rough estimate for your project. For a detailed quote, contact me directly."
-      divider
-    >
-      <ProjectCalculator />
-    </SectionLayout>
-  )
-}
-
-function FAQSectionComponent() {
-  const faqs = [
-    {
-      question: "What is your typical project timeline?",
-      answer:
-        "Project timelines vary based on scope and complexity. A typical website design and development project takes 4-8 weeks from start to finish. During our initial consultation, I'll provide a more accurate timeline based on your specific requirements.",
-    },
-    {
-      question: "How do you price your services?",
-      answer:
-        "Pricing depends on the project's complexity and the resources required. I offer customized quotes after discussing your needs in detail. Factors include design complexity, development hours, and any additional services.",
-    },
-    {
-      question: "What is your design process?",
-      answer:
-        "My design process involves understanding your goals, conducting research, creating wireframes and prototypes, and refining the design based on your feedback. I ensure the final product aligns with your brand and meets user needs.",
-    },
-    {
-      question: "What kind of support do you offer after launch?",
-      answer:
-        "I provide ongoing support to ensure your website runs smoothly. This includes bug fixes, content updates, and technical assistance. I also offer maintenance packages for long-term support and updates.",
-    },
-    {
-      question: "How do you handle revisions and feedback?",
-      answer:
-        "I value your feedback and offer multiple revision rounds to ensure you're satisfied with the final product. I'm committed to making the necessary adjustments to meet your expectations.",
-    },
-  ]
-
-  return (
-    <SectionLayout
-      id="faq"
-      title="Frequently asked questions"
-      subtitle="Answers to common questions about my services, process, and approach to design and development."
-      divider
-    >
-      <StaggeredFadeIn className="grid gap-8" staggerDelay={0.1}>
-        {faqs.map((faq, index) => (
-          <Card3D key={index} className="h-full">
-            <div className="card-style py-4 h-full">
-              <h3 className="heading-3 mb-3">{faq.question}</h3>
-              <p className="text-body">{faq.answer}</p>
-            </div>
-          </Card3D>
-        ))}
-      </StaggeredFadeIn>
-    </SectionLayout>
-  )
-}
-
 function FreeConsultationSection() {
   return (
     <SectionLayout
@@ -717,9 +647,9 @@ function ContactForm() {
       </AnimatedSection>
       <AnimatedSection>
         <form className="grid gap-8">
-          <EnhancedInput label="Name" type="text" placeholder="Your Name" />
-          <EnhancedInput label="Email" type="email" placeholder="Your Email" />
-          <EnhancedTextarea label="Message" placeholder="Your Message" />
+          <EnhancedInput id="name" label="Name" type="text" placeholder="Your Name" required />
+          <EnhancedInput id="email" label="Email" type="email" placeholder="Your Email" required />
+          <EnhancedTextarea id="message" label="Message" placeholder="Your Message" required />
           <div className="mt-4">
             <EnhancedSubmitButton className="px-10 py-5 text-base">Send Message</EnhancedSubmitButton>
           </div>
