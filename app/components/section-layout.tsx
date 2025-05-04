@@ -23,17 +23,19 @@ export function SectionLayout({
   divider = false,
 }: SectionLayoutProps) {
   return (
-    <section id={id} className={`container ${divider ? "section-divider" : ""} section-spacing-lg ${className}`}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+    <section id={id} className={`container ${divider ? "section-divider" : ""} section-spacing-xl ${className}`}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 lg:gap-24">
         <AnimatedSection className="md:sticky md:top-32 self-start">
-          <div className="content-spacing-md">
-            {badge && <div className="badge mb-4">{badge}</div>}
-            <h2 className="heading-2">{title}</h2>
-            {subtitle && <p className="text-body-lg mt-4">{subtitle}</p>}
+          <div className="content-spacing-md text-left">
+            {badge && <div className="badge mb-6">{badge}</div>}
+            <h2 className="heading-2 mb-6">{title}</h2>
+            {subtitle && <p className="text-body-lg">{subtitle}</p>}
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="md:col-span-2">{children}</AnimatedSection>
+        <AnimatedSection className="md:col-span-2">
+          <div className="text-left space-y-12">{children}</div>
+        </AnimatedSection>
       </div>
     </section>
   )

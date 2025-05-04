@@ -72,6 +72,7 @@
   }
   body {
     @apply bg-background text-foreground transition-colors duration-300;
+    line-height: 1.7;
   }
 
   /* Smooth scrolling */
@@ -179,13 +180,13 @@ a:focus-visible {
 
 /* Glass effect */
 .glass-effect {
-  @apply bg-background/30 backdrop-blur-sm border-l-2 border-l-accent/40 pl-6 shadow-none;
+  @apply bg-background/30 backdrop-blur-sm border-l-2 border-l-accent/40 pl-8 shadow-none;
 }
 
 /* Card styles */
 .card-style {
   transition: transform 0.3s ease, border-color 0.3s ease;
-  @apply bg-transparent border-l-2 border-l-accent/40 pl-6 rounded-none shadow-none hover:border-l-accent;
+  @apply bg-transparent border-l-2 border-l-accent/40 pl-8 rounded-none shadow-none hover:border-l-accent;
 }
 
 .card-style:hover {
@@ -205,35 +206,41 @@ a:focus-visible {
   @apply bg-transparent border border-border text-foreground hover:bg-secondary/50 transition-all duration-200;
 }
 
-/* Consistent spacing */
+/* Consistent spacing - INCREASED FOR AIRINESS */
 .section-spacing {
-  @apply py-20 md:py-28;
+  @apply py-24 md:py-32;
 }
 
 .section-spacing-lg {
-  @apply py-28 md:py-36;
+  @apply py-32 md:py-40;
+}
+
+.section-spacing-xl {
+  @apply py-36 md:py-48;
 }
 
 /* Consistent container padding */
 .container-padding {
-  @apply px-4 sm:px-6 lg:px-8;
+  @apply px-6 sm:px-8 lg:px-12;
 }
 
-/* Consistent heading styles */
+/* Consistent heading styles - ENHANCED VISUAL HIERARCHY */
 .heading-1 {
-  @apply text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-foreground;
+  @apply text-5xl md:text-6xl lg:text-7xl font-light tracking-wide text-foreground leading-tight;
+  letter-spacing: -0.02em;
 }
 
 .heading-2 {
-  @apply text-3xl md:text-4xl font-light tracking-wider text-foreground;
+  @apply text-4xl md:text-5xl font-light tracking-wide text-foreground leading-tight;
+  letter-spacing: -0.01em;
 }
 
 .heading-3 {
-  @apply text-2xl font-light tracking-wider text-foreground;
+  @apply text-2xl md:text-3xl font-light tracking-wide text-foreground leading-tight;
 }
 
 .heading-4 {
-  @apply text-lg font-light tracking-wider text-foreground;
+  @apply text-xl font-light tracking-wide text-foreground;
 }
 
 /* Badge styles */
@@ -243,30 +250,30 @@ a:focus-visible {
 
 /* Consistent text styles */
 .text-body {
-  @apply text-muted-foreground font-light leading-relaxed;
+  @apply text-muted-foreground font-light leading-relaxed text-base;
 }
 
 .text-body-lg {
-  @apply text-muted-foreground font-light text-lg leading-relaxed;
+  @apply text-muted-foreground font-light text-xl leading-relaxed;
 }
 
 /* Consistent form styles */
 .form-input {
-  @apply w-full border border-border bg-card/50 px-4 py-2 text-foreground focus:outline-none focus:ring-0 transition-colors rounded-sm;
+  @apply w-full border border-border bg-card/50 px-6 py-3 text-foreground focus:outline-none focus:ring-0 transition-colors rounded-sm;
 }
 
 .form-label {
-  @apply text-sm font-light text-foreground tracking-wider mb-2 block;
+  @apply text-sm font-light text-foreground tracking-wider mb-3 block;
 }
 
 /* Consistent grid layouts */
 .grid-cols-responsive {
-  @apply grid gap-8 md:grid-cols-2 lg:grid-cols-3;
+  @apply grid gap-12 md:grid-cols-2 lg:grid-cols-3;
 }
 
 /* Consistent section dividers */
 .section-divider {
-  @apply border-t border-border/30;
+  @apply border-t border-border/30 pt-12 md:pt-16;
 }
 
 /* Add these animation keyframes at the end of the file */
@@ -393,22 +400,51 @@ a:not(.btn-primary):not(.btn-secondary):not(.btn-outline):hover {
 
 /* Add these new spacing utility classes for better visual hierarchy */
 .content-spacing-sm {
-  @apply space-y-4;
+  @apply space-y-6;
 }
 
 .content-spacing-md {
-  @apply space-y-8;
+  @apply space-y-12;
 }
 
 .content-spacing-lg {
-  @apply space-y-12;
+  @apply space-y-16;
 }
 
 /* Section layout specific styles */
 @media (min-width: 768px) {
   .section-title-sticky {
     position: sticky;
-    top: 6rem;
+    top: 8rem;
     align-self: flex-start;
   }
+}
+
+/* Container max-width adjustments for more breathing room */
+.container {
+  @apply px-6 md:px-8 lg:px-12;
+  max-width: 1400px;
+}
+
+/* Enhanced paragraph spacing */
+p {
+  margin-bottom: 1.5em;
+}
+
+/* Improved list spacing */
+ul,
+ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5em;
+}
+
+li {
+  margin-bottom: 0.75em;
+}
+
+/* Button size and spacing adjustments */
+.btn-primary,
+.btn-secondary,
+.btn-outline {
+  @apply px-8 py-4 text-base;
 }

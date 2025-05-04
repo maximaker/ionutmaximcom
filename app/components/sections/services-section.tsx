@@ -45,16 +45,16 @@ export function ServicesSection() {
         {/* Background decorative elements */}
         <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-primary/5 blur-3xl -z-10"></div>
 
-        <StaggeredFadeIn className="grid gap-12" staggerDelay={0.2}>
+        <StaggeredFadeIn className="grid gap-16" staggerDelay={0.2}>
           {services.map((service, index) => (
             <Card3D key={index} className="h-full">
-              <div className="card-style py-4 h-full group content-spacing-md">
-                <h3 className="heading-3 group-hover:text-accent transition-colors">{service.title}</h3>
-                <p className="text-body">{service.description}</p>
-                <ul className="space-y-2">
+              <div className="card-style py-8 h-full group content-spacing-md">
+                <h3 className="heading-3 mb-6 group-hover:text-accent transition-colors">{service.title}</h3>
+                <p className="text-body mb-8">{service.description}</p>
+                <ul className="space-y-4">
                   {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center gap-2 text-body">
-                      <Check className="h-4 w-4 text-accent" />
+                    <li key={featureIndex} className="flex items-center gap-3 text-body">
+                      <Check className="h-5 w-5 text-accent" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -64,12 +64,12 @@ export function ServicesSection() {
           ))}
         </StaggeredFadeIn>
 
-        <div className="mt-16 text-center">
-          <RippleButton className="btn-outline rounded-none font-light tracking-wider px-8 py-6 h-auto">
+        <div className="mt-24">
+          <RippleButton className="btn-outline rounded-none font-light tracking-wider px-10 py-5 h-auto">
             <SmoothScrollLink to="#contact" className="group-hover:text-accent transition-colors">
               Discuss Your Project
               <motion.span
-                className="inline-block ml-2"
+                className="inline-block ml-3"
                 initial={{ x: 0 }}
                 whileHover={{ x: 5 }}
                 transition={{ type: "spring", stiffness: 300 }}

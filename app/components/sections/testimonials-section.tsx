@@ -41,25 +41,25 @@ export function TestimonialsSection() {
         {/* Background decorative elements */}
         <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-accent/5 blur-3xl -z-10"></div>
 
-        <StaggeredFadeIn className="grid gap-12" staggerDelay={0.2}>
+        <StaggeredFadeIn className="grid gap-16" staggerDelay={0.2}>
           {testimonials.map((testimonial, index) => (
             <Card3D key={index} className="h-full">
-              <div className="card-style py-4 relative h-full content-spacing-md">
-                <div className="absolute -top-4 -left-4 text-4xl text-accent opacity-50">"</div>
-                <p className="text-foreground/90 font-light text-lg leading-relaxed relative z-10">
+              <div className="card-style py-8 relative h-full content-spacing-md">
+                <div className="absolute -top-6 -left-6 text-5xl text-accent opacity-50">"</div>
+                <p className="text-foreground/90 font-light text-xl leading-relaxed relative z-10 mb-8">
                   {testimonial.quote}
                 </p>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-6">
                   <LazyImage
                     src={testimonial.image || "/placeholder.svg"}
                     alt={testimonial.author}
-                    width={50}
-                    height={50}
+                    width={60}
+                    height={60}
                     className="rounded-full object-cover"
                   />
                   <div>
-                    <p className="text-foreground font-light">{testimonial.author}</p>
-                    <p className="text-muted-foreground text-sm">{testimonial.position}</p>
+                    <p className="text-foreground font-light text-lg">{testimonial.author}</p>
+                    <p className="text-muted-foreground">{testimonial.position}</p>
                   </div>
                 </div>
               </div>
@@ -67,23 +67,23 @@ export function TestimonialsSection() {
           ))}
         </StaggeredFadeIn>
 
-        <div className="mt-20 flex justify-center">
+        <div className="mt-24">
           <Card3D>
-            <div className="glass-effect py-8 text-center content-spacing-md">
-              <div className="flex justify-center">
+            <div className="glass-effect py-12 text-left content-spacing-md">
+              <div className="flex mb-6">
                 <div className="flex">
-                  <div className="text-accent">★</div>
-                  <div className="text-accent">★</div>
-                  <div className="text-accent">★</div>
-                  <div className="text-accent">★</div>
-                  <div className="text-accent">★</div>
+                  <div className="text-accent text-xl">★</div>
+                  <div className="text-accent text-xl">★</div>
+                  <div className="text-accent text-xl">★</div>
+                  <div className="text-accent text-xl">★</div>
+                  <div className="text-accent text-xl">★</div>
                 </div>
               </div>
-              <p className="text-foreground/90 font-light text-xl">
+              <p className="text-foreground/90 font-light text-2xl mb-8">
                 "<SmoothCounter value={100} suffix="%" /> satisfaction rate based on{" "}
                 <SmoothCounter value={20} suffix="+" /> client projects"
               </p>
-              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-8 py-4 h-auto relative overflow-hidden group">
+              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-10 py-5 h-auto relative overflow-hidden group">
                 <SmoothScrollLink to="#contact" className="block">
                   <span className="relative z-10">Start Your Project</span>
                   <span className="absolute inset-0 bg-accent/80 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>

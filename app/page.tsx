@@ -269,13 +269,13 @@ function MobileNav() {
 
 function HeroSection() {
   return (
-    <section className="container section-spacing-lg flex items-center min-h-[90vh] relative overflow-hidden">
+    <section className="container section-spacing-xl flex items-center min-h-[90vh] relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/5 blur-3xl"></div>
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-accent/5 blur-3xl"></div>
 
-      <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center relative z-10">
-        <AnimatedSection className="space-y-8">
+      <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
+        <AnimatedSection className="space-y-12">
           <motion.div
             className="badge"
             initial={{ opacity: 0, y: -20 }}
@@ -301,17 +301,17 @@ function HeroSection() {
             results.
           </motion.p>
           <motion.div
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
             <MagneticElement strength={20}>
-              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-8 py-6 h-auto relative overflow-hidden group">
+              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-10 py-5 h-auto relative overflow-hidden group">
                 <SmoothScrollLink to="#contact" className="flex items-center">
                   <span className="relative z-10">Get Started</span>
                   <motion.span
-                    className="inline-block ml-2 relative z-10"
+                    className="inline-block ml-3 relative z-10"
                     initial={{ x: 0 }}
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
@@ -322,21 +322,21 @@ function HeroSection() {
                 </SmoothScrollLink>
               </RippleButton>
             </MagneticElement>
-            <RippleButton className="btn-outline rounded-none font-light tracking-wider px-8 py-6 h-auto">
+            <RippleButton className="btn-outline rounded-none font-light tracking-wider px-10 py-5 h-auto">
               <SmoothScrollLink to="#projects">View My Work</SmoothScrollLink>
             </RippleButton>
           </motion.div>
           <motion.div
-            className="pt-4 flex items-center gap-4"
+            className="pt-6 flex items-center gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
             <div className="flex -space-x-2">
-              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-xs">5.0</div>
-              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
-              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
-              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
+              <div className="w-10 h-10 rounded-full bg-card/50 flex items-center justify-center text-xs">5.0</div>
+              <div className="w-10 h-10 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
+              <div className="w-10 h-10 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
+              <div className="w-10 h-10 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
             </div>
             <span className="text-muted-foreground text-sm">
               Based on <SmoothCounter value={20} suffix="+" className="text-accent" /> client reviews
@@ -357,9 +357,9 @@ function HeroSection() {
                 height={600}
                 className="object-cover rounded-sm border border-border"
               />
-              <GlassCard className="absolute -bottom-6 -left-6 p-4 backdrop-blur-sm border border-border shadow-lg">
+              <GlassCard className="absolute -bottom-8 -left-8 p-6 backdrop-blur-sm border border-border shadow-lg">
                 <p className="text-foreground font-light text-sm">
-                  <span className="text-accent block mb-1">8+ Years Experience</span>
+                  <span className="text-accent block mb-2">8+ Years Experience</span>
                   Delivering exceptional digital solutions
                 </p>
               </GlassCard>
@@ -640,7 +640,6 @@ function FAQSectionComponent() {
   return (
     <SectionLayout
       id="faq"
-      badge="FAQ"
       title="Frequently asked questions"
       subtitle="Answers to common questions about my services, process, and approach to design and development."
       divider
@@ -688,34 +687,42 @@ function ContactSection() {
 
 function ContactForm() {
   return (
-    <div className="grid gap-8">
-      <AnimatedSection className="space-y-6">
-        <h3 className="heading-3 mb-4">Contact Information</h3>
+    <div className="grid gap-16">
+      <AnimatedSection className="space-y-8">
+        <h3 className="heading-3 mb-6">Contact Information</h3>
         <p className="text-body">
           Feel free to reach out with any questions or project inquiries. I'm always open to discussing new
           opportunities and collaborations.
         </p>
-        <div className="space-y-2">
-          <p className="text-body flex items-center gap-2">
-            <Mail className="h-5 w-5 text-muted-foreground" />
-            <a href="mailto:ionut@example.com">ionut@example.com</a>
+        <div className="space-y-4">
+          <p className="text-body flex items-center gap-3">
+            <Mail className="h-6 w-6 text-muted-foreground" />
+            <a href="mailto:ionut@example.com" className="text-lg">
+              ionut@example.com
+            </a>
           </p>
-          <p className="text-body flex items-center gap-2">
-            <Linkedin className="h-5 w-5 text-muted-foreground" />
-            <a href="https://linkedin.com/in/ionutmaxim">linkedin.com/in/ionutmaxim</a>
+          <p className="text-body flex items-center gap-3">
+            <Linkedin className="h-6 w-6 text-muted-foreground" />
+            <a href="https://linkedin.com/in/ionutmaxim" className="text-lg">
+              linkedin.com/in/ionutmaxim
+            </a>
           </p>
-          <p className="text-body flex items-center gap-2">
-            <Github className="h-5 w-5 text-muted-foreground" />
-            <a href="https://github.com/ionutmaxim">github.com/ionutmaxim</a>
+          <p className="text-body flex items-center gap-3">
+            <Github className="h-6 w-6 text-muted-foreground" />
+            <a href="https://github.com/ionutmaxim" className="text-lg">
+              github.com/ionutmaxim
+            </a>
           </p>
         </div>
       </AnimatedSection>
       <AnimatedSection>
-        <form className="grid gap-4">
+        <form className="grid gap-8">
           <EnhancedInput label="Name" type="text" placeholder="Your Name" />
           <EnhancedInput label="Email" type="email" placeholder="Your Email" />
           <EnhancedTextarea label="Message" placeholder="Your Message" />
-          <EnhancedSubmitButton>Send Message</EnhancedSubmitButton>
+          <div className="mt-4">
+            <EnhancedSubmitButton className="px-10 py-5 text-base">Send Message</EnhancedSubmitButton>
+          </div>
         </form>
       </AnimatedSection>
     </div>
@@ -725,57 +732,63 @@ function ContactForm() {
 function Footer() {
   return (
     <footer className="container section-spacing-lg border-t border-border">
-      <div className="grid md:grid-cols-3 gap-8 py-12">
-        <div className="space-y-4">
-          <Link href="/" className="font-light text-xl tracking-wider text-foreground">
+      <div className="grid md:grid-cols-3 gap-16 py-16">
+        <div className="space-y-6">
+          <Link href="/" className="font-light text-2xl tracking-wider text-foreground">
             ionut<span className="text-accent">maxim</span>
           </Link>
-          <p className="text-body">Strategic design and development to elevate your brand and drive results.</p>
+          <p className="text-body text-lg">Strategic design and development to elevate your brand and drive results.</p>
         </div>
-        <div className="grid grid-cols-2 gap-8 md:col-span-2">
-          <div className="space-y-4">
-            <h4 className="heading-4">Navigation</h4>
-            <ul className="space-y-2">
+        <div className="grid grid-cols-2 gap-16 md:col-span-2">
+          <div className="space-y-6">
+            <h4 className="heading-4 mb-4">Navigation</h4>
+            <ul className="space-y-4">
               <li>
-                <SmoothScrollLink to="#services" className="text-body hover:text-foreground transition-colors">
+                <SmoothScrollLink to="#services" className="text-body hover:text-foreground transition-colors text-lg">
                   Services
                 </SmoothScrollLink>
               </li>
               <li>
-                <SmoothScrollLink to="#projects" className="text-body hover:text-foreground transition-colors">
+                <SmoothScrollLink to="#projects" className="text-body hover:text-foreground transition-colors text-lg">
                   Work
                 </SmoothScrollLink>
               </li>
               <li>
-                <SmoothScrollLink to="#resources" className="text-body hover:text-foreground transition-colors">
+                <SmoothScrollLink to="#resources" className="text-body hover:text-foreground transition-colors text-lg">
                   Resources
                 </SmoothScrollLink>
               </li>
               <li>
-                <SmoothScrollLink to="#contact" className="text-body hover:text-foreground transition-colors">
+                <SmoothScrollLink to="#contact" className="text-body hover:text-foreground transition-colors text-lg">
                   Contact
                 </SmoothScrollLink>
               </li>
             </ul>
           </div>
-          <div className="space-y-4">
-            <h4 className="heading-4">Connect</h4>
-            <ul className="space-y-2">
+          <div className="space-y-6">
+            <h4 className="heading-4 mb-4">Connect</h4>
+            <ul className="space-y-4">
               <li>
                 <a
                   href="https://linkedin.com/in/ionutmaxim"
-                  className="text-body hover:text-foreground transition-colors"
+                  className="text-body hover:text-foreground transition-colors text-lg"
                 >
                   LinkedIn
                 </a>
               </li>
               <li>
-                <a href="https://github.com/ionutmaxim" className="text-body hover:text-foreground transition-colors">
+                <a
+                  href="https://github.com/ionutmaxim"
+                  className="text-body hover:text-foreground transition-colors text-lg"
+                >
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="mailto:ionut@example.com" className="text-body hover:text-foreground transition-colors">
+                <a
+                  href="mailto:ionut@example.com"
+                  className="text-body hover:text-foreground transition-colors text-lg"
+                >
                   Email
                 </a>
               </li>
@@ -783,7 +796,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="text-center text-muted-foreground text-sm py-4">
+      <div className="text-left text-muted-foreground text-base py-8 border-t border-border/30">
         © {new Date().getFullYear()} Ionut Maxim. All rights reserved.
       </div>
     </footer>
