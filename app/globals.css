@@ -73,12 +73,21 @@
   body {
     @apply bg-background text-foreground transition-colors duration-300;
     line-height: 1.7;
+    /* Fix for content visibility */
     overflow-x: hidden;
+    position: relative;
   }
 
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Fix for z-index stacking context */
+  main,
+  section,
+  div {
+    position: relative;
   }
 }
 
@@ -464,28 +473,18 @@ li {
 /* Modal overlay styles */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
   z-index: 100;
 }
 
 .modal-content {
-  position: relative;
-  background-color: hsl(var(--background));
-  border: 1px solid hsl(var(--border));
-  padding: 2rem;
-  border-radius: 0.5rem;
-  width: 90%;
-  max-width: 500px;
-  max-height: 90vh;
-  overflow-y: auto;
+  @apply bg-card border border-border shadow-lg max-w-lg w-full p-8 relative;
 }
 
 /* Resources section - less crowded */
@@ -497,7 +496,76 @@ li {
   @apply p-8 space-y-6;
 }
 
+/* Fix for z-index issues */
+.z-0 {
+  z-index: 0;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-20 {
+  z-index: 20;
+}
+.z-30 {
+  z-index: 30;
+}
+.z-40 {
+  z-index: 40;
+}
+.z-50 {
+  z-index: 50;
+}
+.z-60 {
+  z-index: 60;
+}
+.z-70 {
+  z-index: 70;
+}
+.z-80 {
+  z-index: 80;
+}
+.z-90 {
+  z-index: 90;
+}
+.z-100 {
+  z-index: 100;
+}
+
+/* Fix for content visibility */
+.content-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Fix for cursor issues */
+.custom-cursor {
+  z-index: 9999 !important;
+  pointer-events: none !important;
+}
+
+/* Ensure modals and overlays don't interfere with cursor */
+.modal-overlay * {
+  cursor: auto !important;
+}
+
 /* Resource icons */
 .resource-icon {
   @apply h-12 w-12 text-accent mb-6;
+}
+
+/* Add this to ensure main content is visible */
+main {
+  position: relative;
+  z-index: 10;
+}
+
+/* Ensure sections have proper z-index */
+section {
+  position: relative;
+  z-index: 10;
+}
+
+/* Fix for background elements that might be covering content */
+.absolute {
+  z-index: 0;
 }

@@ -208,7 +208,7 @@ export function SpotlightCursor() {
   const isDark = theme === "dark"
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-30 overflow-hidden" style={{ opacity: isVisible ? 1 : 0 }}>
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" style={{ opacity: isVisible ? 1 : 0 }}>
       <div
         className="absolute w-[500px] h-[500px] rounded-full pointer-events-none transition-opacity duration-300"
         style={{

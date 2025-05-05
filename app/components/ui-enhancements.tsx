@@ -244,7 +244,7 @@ export function ParallaxBackground() {
   }, [])
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
       <div
         className="absolute top-0 left-0 w-full h-full opacity-30"
         style={{
