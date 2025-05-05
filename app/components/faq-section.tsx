@@ -1,12 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Card3D } from "./advanced-interactions"
-import { SectionLayout } from "./section-layout"
-import { StaggeredFadeIn } from "./advanced-interactions"
 import { X } from "lucide-react"
-import { EnhancedInput, EnhancedTextarea, EnhancedSubmitButton } from "./enhanced-form"
+import { Button } from "@/components/ui/button"
 
 export function FAQSection() {
   const [isFormOpen, setIsFormOpen] = useState(false)
@@ -40,74 +36,85 @@ export function FAQSection() {
   ]
 
   return (
-    <SectionLayout
-      id="faq"
-      badge="FAQ"
-      title="Frequently asked questions"
-      subtitle="Answers to common questions about my services, process, and approach to design and development."
-      divider
-    >
-      <div className="space-y-12">
-        <StaggeredFadeIn className="grid gap-8" staggerDelay={0.1}>
-          {faqs.map((faq, index) => (
-            <Card3D key={index} className="h-full">
-              <div className="card-style py-8 h-full">
-                <h3 className="heading-3 mb-4">{faq.question}</h3>
-                <p className="text-body">{faq.answer}</p>
-              </div>
-            </Card3D>
-          ))}
-        </StaggeredFadeIn>
-
-        <div className="text-left">
-          <button
-            onClick={() => setIsFormOpen(true)}
-            className="text-accent hover:text-accent/80 transition-colors flex items-center gap-2 text-lg"
-          >
-            Don't see your question? Ask me directly →
-          </button>
+    <section id="faq" className="container py-24 md:py-32 border-t border-border">
+      <div className="grid md:grid-cols-3 gap-16">
+        <div>
+          <div className="badge mb-6">FAQ</div>
+          <h2 className="heading-2 mb-6">Frequently asked questions</h2>
+          <p className="text-body-lg">
+            Answers to common questions about my services, process, and approach to design and development.
+          </p>
         </div>
 
-        <AnimatePresence>
+        <div className="md:col-span-2 grid gap-8">
+          {faqs.map((faq, index) => (
+            <div key={index} className="card-style">
+              <h3 className="heading-3">{faq.question}</h3>
+              <p className="text-body">{faq.answer}</p>
+            </div>
+          ))}
+
+          <div className="mt-8">
+            <button
+              onClick={() => setIsFormOpen(true)}
+              className="text-accent hover:text-accent/80 transition-colors flex items-center gap-2 text-lg"
+            >
+              Don't see your question? Ask me directly →
+            </button>
+          </div>
+
           {isFormOpen && (
-            <motion.div
-              className="modal-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
               onClick={() => setIsFormOpen(false)}
             >
-              <motion.div
-                className="modal-content"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
+              <div
+                className="bg-background border border-border p-8 max-w-md w-full rounded-md"
                 onClick={(e) => e.stopPropagation()}
               >
-                <button
-                  className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
-                  onClick={() => setIsFormOpen(false)}
-                >
-                  <X className="h-5 w-5" />
-                </button>
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="heading-3 mb-0">Ask a Question</h3>
+                  <button
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsFormOpen(false)}
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
 
-                <h3 className="heading-3 mb-6">Ask a Question</h3>
                 <form className="space-y-6">
-                  <EnhancedInput id="name" label="Name" placeholder="Your name" required />
-                  <EnhancedInput id="email" label="Email" type="email" placeholder="Your email" required />
-                  <EnhancedTextarea
-                    id="question"
-                    label="Your Question"
-                    placeholder="What would you like to know?"
-                    required
-                  />
-                  <EnhancedSubmitButton>Submit Question</EnhancedSubmitButton>
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="form-label">
+                      Name
+                    </label>
+                    <input id="name" type="text" className="form-input" placeholder="Your name" required />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                    <input id="email" type="email" className="form-input" placeholder="Your email" required />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="question" className="form-label">
+                      Your Question
+                    </label>
+                    <textarea
+                      id="question"
+                      className="form-input min-h-[120px]"
+                      placeholder="What would you like to know?"
+                      required
+                    ></textarea>
+                  </div>
+                  <Button type="submit" className="bg-accent text-white hover:bg-accent/90">
+                    Submit Question
+                  </Button>
                 </form>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           )}
-        </AnimatePresence>
+        </div>
       </div>
-    </SectionLayout>
+    </section>
   )
 }
