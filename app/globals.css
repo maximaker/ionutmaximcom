@@ -556,13 +556,13 @@ li {
 /* Add this to ensure main content is visible */
 main {
   position: relative;
-  z-index: 10;
+  z-index: 1;
 }
 
 /* Ensure sections have proper z-index */
 section {
   position: relative;
-  z-index: 10;
+  z-index: 1;
 }
 
 /* Fix for background elements that might be covering content */
