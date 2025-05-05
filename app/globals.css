@@ -535,6 +535,8 @@ li {
 .content-visible {
   visibility: visible;
   opacity: 1;
+  z-index: 10;
+  position: relative;
 }
 
 /* Fix for cursor issues */
@@ -556,13 +558,13 @@ li {
 /* Add this to ensure main content is visible */
 main {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 /* Ensure sections have proper z-index */
 section {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 /* Fix for background elements that might be covering content */

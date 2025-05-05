@@ -53,6 +53,7 @@ export function SectionLayout({
       id={id}
       ref={sectionRef}
       className={`container ${divider ? "section-divider" : ""} section-spacing-xl ${className} ${isInView ? "section-in-view" : ""}`}
+      style={{ position: "relative", zIndex: 10 }}
     >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20 lg:gap-28">
         <AnimatedSection className="md:sticky md:top-32 self-start">
