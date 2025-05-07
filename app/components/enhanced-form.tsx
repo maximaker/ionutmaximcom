@@ -79,6 +79,7 @@ export function EnhancedInput({
             focused ? "border-accent ring-1 ring-accent/20" : ""
           } ${!isValid && touched ? "border-red-500" : ""}`}
           required={required}
+          spellCheck={false}
         />
         <AnimatePresence>
           {focused && (
@@ -168,11 +169,11 @@ export function EnhancedTextarea({
           onBlur={handleBlur}
           placeholder={placeholder}
           maxLength={maxLength}
-          spellCheck={false}
           className={`form-input w-full min-h-[120px] resize-none transition-all duration-300 ${
             focused ? "border-accent ring-1 ring-accent/20" : ""
           } ${!isValid && touched ? "border-red-500" : ""}`}
           required={required}
+          spellCheck={false}
         />
         {maxLength && (
           <div className="absolute bottom-2 right-2 text-xs font-light text-muted-foreground">
@@ -291,29 +292,7 @@ export function EnhancedSubmitButton({
 }) {
   return (
     <Button type="submit" disabled={isSubmitting} className={`relative overflow-hidden group ${className}`}>
-      <AnimatePresence mode="wait">
-        {isSubmitting ? (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center bg-inherit"
-          >
-            <div className="h-5 w-5 border-2 border-t-transparent rounded-full animate-spin" />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex items-center gap-2"
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {children}
     </Button>
   )
 }

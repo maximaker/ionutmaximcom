@@ -6,8 +6,8 @@ import { AnimatedSection } from "./ui-enhancements"
 
 interface SectionLayoutProps {
   id?: string
-  title: string
-  subtitle?: string
+  title: React.ReactNode
+  subtitle?: React.ReactNode
   badge?: string
   children: ReactNode
   className?: string
