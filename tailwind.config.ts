@@ -18,10 +18,13 @@ const config = {
         "2xl": "1400px",
       },
     },
+<<<<<<< HEAD
     fontFamily: {
       sans: ["Nunito Sans", "sans-serif"],
       heading: ["Ubuntu", "sans-serif"],
     },
+=======
+>>>>>>> ceace3472198200de37decfe24c2c52c7021e300
     extend: {
       colors: {
         meralgun: {

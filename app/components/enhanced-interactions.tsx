@@ -20,8 +20,12 @@ import Link from "next/link"
 // Enhanced Hero Section with advanced animations
 export function EnhancedHero() {
   return (
+<<<<<<< HEAD
     <section className="container section-spacing-lg flex items-center min-h-[90vh] relative overflow-hidden px-4 md:px-6">
       <div className="w-full max-w-7xl mx-auto">
+=======
+    <section className="container section-spacing-lg flex items-center min-h-[90vh] relative overflow-hidden">
+>>>>>>> ceace3472198200de37decfe24c2c52c7021e300
       {/* Background decorative elements */}
       <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/5 blur-3xl"></div>
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-accent/5 blur-3xl"></div>

@@ -79,10 +79,17 @@ export function TestimonialsSection() {
                   <div className="text-accent text-xl">★</div>
                 </div>
               </div>
+<<<<<<< HEAD
               <div className="text-foreground/90 font-light text-2xl mb-8">
                 "<SmoothCounter value={100} suffix="%" /> satisfaction rate based on{" "}
                 <SmoothCounter value={20} suffix="+" /> client projects"
               </div>
+=======
+              <p className="text-foreground/90 font-light text-2xl mb-8">
+                "<SmoothCounter value={100} suffix="%" /> satisfaction rate based on{" "}
+                <SmoothCounter value={20} suffix="+" /> client projects"
+              </p>
+>>>>>>> ceace3472198200de37decfe24c2c52c7021e300
               <RippleButton className="btn-primary rounded-none font-light tracking-wider px-10 py-5 h-auto relative overflow-hidden group">
                 <SmoothScrollLink to="#contact" className="block">
                   <span className="relative z-10">Start Your Project</span>

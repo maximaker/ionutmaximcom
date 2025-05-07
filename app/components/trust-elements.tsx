@@ -4,7 +4,11 @@ import { Award, CheckCircle, FileText, Shield } from "lucide-react"
 
 export function TrustBadges() {
   return (
+<<<<<<< HEAD
     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center py-8">
+=======
+    <div className="flex flex-wrap justify-center gap-8 items-center py-8">
+>>>>>>> ceace3472198200de37decfe24c2c52c7021e300
       <div className="flex flex-col items-center gap-2">
         <Shield className="h-8 w-8 text-accent" />
         <span className="text-muted-foreground text-sm font-light">Secure Process</span>
@@ -47,9 +51,15 @@ export function ResultsShowcase() {
 
 export function ClientLogos() {
   return (
+<<<<<<< HEAD
     <div className="grid grid-cols-3 md:grid-cols-5 gap-8 items-center">
       {[1, 2, 3, 4, 5, 6].map((index) => (
         <div key={index} className={`bg-card/50 border border-border aspect-[3/1] flex items-center justify-center p-4 ${index > 5 ? 'md:hidden' : ''}`}>
+=======
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
+      {[1, 2, 3, 4, 5].map((index) => (
+        <div key={index} className="bg-card/50 border border-border aspect-[3/1] flex items-center justify-center p-4">
+>>>>>>> ceace3472198200de37decfe24c2c52c7021e300
           <div className="text-muted-foreground font-light text-lg tracking-wider">Client {index}</div>
         </div>
       ))}
