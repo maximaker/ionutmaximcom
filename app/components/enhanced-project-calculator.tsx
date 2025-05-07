@@ -79,10 +79,7 @@ export function EnhancedProjectCalculator() {
       // Base price by project type
       if (projectType === "landing") basePrice = 2000
       if (projectType === "business") basePrice = 5000
-<<<<<<< HEAD
-=======
       if (projectType === "ecommerce") basePrice = 8000
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
       if (projectType === "mobile-app") basePrice = 10000
       if (projectType === "web-app") basePrice = 12000
 
@@ -101,9 +98,6 @@ export function EnhancedProjectCalculator() {
         if (features.includes("seo")) featuresCost += 1000
         if (features.includes("analytics")) featuresCost += 500
         if (features.includes("multilingual")) featuresCost += 1500
-<<<<<<< HEAD
-
-=======
       } else if (projectType === "ecommerce") {
         if (features.includes("custom-design")) featuresCost += 2000
         if (features.includes("product-management")) featuresCost += 1500
@@ -111,7 +105,6 @@ export function EnhancedProjectCalculator() {
         if (features.includes("inventory")) featuresCost += 1200
         if (features.includes("shipping")) featuresCost += 800
         if (features.includes("analytics")) featuresCost += 700
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
       } else if (projectType === "mobile-app") {
         if (features.includes("ui-design")) featuresCost += 2500
         if (features.includes("user-auth")) featuresCost += 1500
@@ -166,10 +159,7 @@ export function EnhancedProjectCalculator() {
               {[
                 { id: "landing", label: "Landing Page", tooltip: "A single page website focused on conversion" },
                 { id: "business", label: "Business Website", tooltip: "Multi-page website for established businesses" },
-<<<<<<< HEAD
-=======
                 { id: "ecommerce", label: "E-commerce", tooltip: "Online store with product catalog and checkout" },
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
                 { id: "mobile-app", label: "Mobile App", tooltip: "Native or hybrid mobile application" },
                 { id: "web-app", label: "Web Application", tooltip: "Complex web-based software application" },
               ].map((type) => (

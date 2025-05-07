@@ -92,27 +92,6 @@ export function Toast({
 
   return (
     <motion.div
-<<<<<<< HEAD
-      className="fixed bottom-safe left-4 right-4 md:bottom-8 md:left-1/2 md:-translate-x-1/2 z-[60] touch-none"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      drag="y"
-      dragConstraints={{ top: 0, bottom: 0 }}
-      dragElastic={0.2}
-      onDragEnd={(_, info) => {
-        if (Math.abs(info.offset.y) > 50) {
-          onClose()
-        }
-      }}
-    >
-      <GlassCard className="w-full px-4 py-3 flex items-center gap-3 shadow-lg border-border">
-        {icons[type]}
-        <span className="text-sm font-light flex-1">{message}</span>
-        <button
-          onClick={onClose}
-          className="ml-2 p-2 text-muted-foreground hover:text-foreground transition-colors"
-=======
       className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -124,7 +103,6 @@ export function Toast({
         <button
           onClick={onClose}
           className="ml-2 text-muted-foreground hover:text-foreground transition-colors"
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
           aria-label="Close notification"
         >
           <X className="h-3 w-3" />
@@ -166,11 +144,7 @@ export function ToastManager() {
   }, [])
 
   return (
-<<<<<<< HEAD
-    <div className="fixed bottom-safe left-4 right-4 md:bottom-8 md:left-1/2 md:-translate-x-1/2 z-[60] flex flex-col gap-2 pointer-events-none">
-=======
     <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-2">
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
       <AnimatePresence>
         {toasts.map((toast) => (
           <motion.div
@@ -178,34 +152,15 @@ export function ToastManager() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-<<<<<<< HEAD
-            className="bg-card/90 backdrop-blur-sm border border-border shadow-lg px-4 py-3 rounded-sm flex items-center gap-3 pointer-events-auto"
-            drag="y"
-            dragConstraints={{ top: 0, bottom: 0 }}
-            dragElastic={0.2}
-            onDragEnd={(_, info) => {
-              if (Math.abs(info.offset.y) > 50) {
-                setToasts((prev) => prev.filter((t) => t.id !== toast.id))
-              }
-            }}
-=======
             className="bg-card/90 backdrop-blur-sm border border-border shadow-lg px-4 py-3 rounded-sm flex items-center gap-3"
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
           >
             {toast.type === "success" && <Check className="h-4 w-4 text-green-500" />}
             {toast.type === "error" && <X className="h-4 w-4 text-red-500" />}
             {toast.type === "info" && <Info className="h-4 w-4 text-accent" />}
-<<<<<<< HEAD
-            <span className="text-sm font-light flex-1">{toast.message}</span>
-            <button
-              onClick={() => setToasts((prev) => prev.filter((t) => t.id !== toast.id))}
-              className="ml-2 p-2 text-muted-foreground hover:text-foreground transition-colors"
-=======
             <span className="text-sm font-light">{toast.message}</span>
             <button
               onClick={() => setToasts((prev) => prev.filter((t) => t.id !== toast.id))}
               className="ml-2 text-muted-foreground hover:text-foreground transition-colors"
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
               aria-label="Close notification"
             >
               <X className="h-3 w-3" />
@@ -421,23 +376,11 @@ export function ScrollIndicator() {
   }, [])
 
   return (
-<<<<<<< HEAD
-    <div
-      className="fixed bottom-0 left-0 w-full h-1 bg-accent/20 z-[100] touch-none pointer-events-none">
-      <motion.div
-        className="h-full bg-accent/50 origin-left"
-        style={{ width: `${scrollPercentage}%` }}
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      />
-=======
     <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
       <div className="h-40 w-1 bg-border relative rounded-full overflow-hidden">
         <motion.div className="absolute bottom-0 left-0 right-0 bg-accent" style={{ height: `${scrollPercentage}%` }} />
       </div>
       <div className="mt-2 text-xs font-light text-center text-muted-foreground">{Math.round(scrollPercentage)}%</div>
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
     </div>
   )
 }
