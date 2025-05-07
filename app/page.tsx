@@ -7,7 +7,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 // Import trust-building components
-import { TrustBadges, ClientLogos, DetailedCaseStudy, PersonalStory } from "./components/trust-elements"
+import { TrustBadges } from "./components/trust-elements"
 
 // Import value-adding components
 import { FreeConsultationCTA } from "./components/value-elements"
@@ -62,7 +62,6 @@ import { CalculatorSection } from "./components/calculator-section"
 // Update the main container to use our new spacing classes
 export default function LandingPage() {
   return (
-<<<<<<< HEAD
     <div className="min-h-screen text-foreground flex flex-col theme-transition overflow-x-hidden">
       <div className="max-w-[100vw] relative">
         <SkipToContent />
@@ -93,36 +92,6 @@ export default function LandingPage() {
         <ToastManager />
         <ScrollIndicator />
       </div>
-=======
-    <div className="min-h-screen text-foreground flex flex-col theme-transition">
-      <SkipToContent />
-      <CustomCursor />
-      <ScrollProgressBar />
-      <SpotlightCursor />
-      <ParallaxBackground />
-      <Header />
-      <main id="main-content" className="flex-1 content-spacing-lg relative z-10">
-        <HeroSection />
-        <ClientsSection />
-        <ResultsSection />
-        <ServicesSection />
-        <TestimonialsSection />
-        <CaseStudySection />
-        <ProjectsSection />
-        <ProcessSection />
-        <ResourcesSection />
-        <CalculatorSection />
-        <FAQSection />
-        <FreeConsultationSection />
-        <ContactSection />
-      </main>
-      <Footer />
-      <LiveChatButton />
-      <BackToTop />
-      <ThemeToggle />
-      <ToastManager />
-      <ScrollIndicator />
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
     </div>
   )
 }
@@ -218,15 +187,11 @@ function Header() {
           <AnimatedMenuIcon isOpen={isMenuOpen} toggle={() => setIsMenuOpen(!isMenuOpen)} />
         </div>
       </div>
-<<<<<<< HEAD
       <MobileNav isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
-=======
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
     </header>
   )
 }
 
-<<<<<<< HEAD
 function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen: boolean) => void }) {
   return (
     <AnimatePresence>
@@ -248,49 +213,16 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen:
               <Link href="/" className="font-light text-xl tracking-wider" onClick={() => setIsOpen(false)}>
                 <span className="text-foreground">ionut</span>
                 <span className="text-accent">maxim</span>
-=======
-function MobileNav() {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <div className="md:hidden">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setIsOpen(true)}
-        aria-label="Open Menu"
-        className="text-foreground hover:bg-background/10 rounded-full w-10 h-10"
-      >
-        <Menu className="h-5 w-5" />
-      </Button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-background"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="container flex h-20 items-center justify-between">
-              <Link href="/" className="font-light text-xl tracking-wider text-foreground">
-                ionut<span className="text-accent">maxim</span>
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
               </Link>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsOpen(false)}
-<<<<<<< HEAD
                 className="text-muted-foreground hover:text-foreground"
-=======
-                aria-label="Close Menu"
-                className="text-foreground hover:bg-background/10 rounded-full w-10 h-10"
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
               >
                 <X className="h-5 w-5" />
               </Button>
             </div>
-<<<<<<< HEAD
             <nav className="flex flex-col gap-6">
               {[
                 { name: 'Services', href: '#services' },
@@ -298,88 +230,36 @@ function MobileNav() {
                 { name: 'Resources', href: '#resources' },
                 { name: 'Contact', href: '#contact' },
               ].map((item) => (
-                <SmoothScrollLink
-                  key={item.name}
-                  to={item.href}
-                  className="text-lg font-light tracking-wider hover:text-accent transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </SmoothScrollLink>
+                <span onClick={() => setIsOpen(false)}>
+                  <SmoothScrollLink
+                    key={item.name}
+                    to={item.href}
+                    className="text-lg font-light tracking-wider hover:text-accent transition-colors"
+                  >
+                    {item.name}
+                  </SmoothScrollLink>
+                </span>
               ))}
             </nav>
             <div className="mt-8">
               <Button className="w-full btn-primary rounded-none font-light tracking-wider px-6 py-2 h-auto">
-                <SmoothScrollLink to="#contact" className="flex items-center justify-center" onClick={() => setIsOpen(false)}>
-                  Get a Quote
-                  <span className="ml-2">→</span>
-                </SmoothScrollLink>
+                <span onClick={() => setIsOpen(false)}>
+                  <SmoothScrollLink to="#contact" className="flex items-center justify-center">
+                    Get a Quote
+                    <span className="ml-2">→</span>
+                  </SmoothScrollLink>
+                </span>
               </Button>
             </div>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
-=======
-            <motion.nav
-              className="container grid gap-8 py-12"
-              initial="closed"
-              animate="open"
-              variants={{
-                open: { transition: { staggerChildren: 0.1 } },
-                closed: {},
-              }}
-            >
-              {[
-                { name: "Services", href: "#services" },
-                { name: "Work", href: "#projects" },
-                { name: "Resources", href: "#resources" },
-                { name: "Contact", href: "#contact" },
-              ].map((item) => (
-                <motion.div
-                  key={item.name}
-                  variants={{
-                    open: { opacity: 1, y: 0 },
-                    closed: { opacity: 0, y: 20 },
-                  }}
-                >
-                  <SmoothScrollLink
-                    to={item.href}
-                    className="text-2xl font-extralight tracking-wider text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <AnimatedUnderline>{item.name}</AnimatedUnderline>
-                  </SmoothScrollLink>
-                </motion.div>
-              ))}
-              <motion.div
-                variants={{
-                  open: { opacity: 1, y: 0 },
-                  closed: { opacity: 0, y: 20 },
-                }}
-                className="pt-8"
-              >
-                <RippleButton
-                  className="btn-primary rounded-none font-light tracking-wider px-6 py-6 h-auto w-full"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <SmoothScrollLink to="#contact" className="block">
-                    Get a Quote
-                  </SmoothScrollLink>
-                </RippleButton>
-              </motion.div>
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
   )
 }
 
 function HeroSection() {
   return (
-<<<<<<< HEAD
     <section className="container section-spacing-xl flex items-center min-h-[80vh] md:min-h-[90vh] relative overflow-hidden px-4 md:px-6 max-w-full">
       {/* Background decorative elements */}
       <div className="absolute top-1/4 left-1/4 w-48 md:w-64 h-48 md:h-64 rounded-full bg-primary/5 blur-3xl"></div>
@@ -389,24 +269,12 @@ function HeroSection() {
         <AnimatedSection className="space-y-6 md:space-y-12">
           <motion.div
             className="badge inline-block text-sm md:text-base"
-=======
-    <section className="container section-spacing-xl flex items-center min-h-[90vh] relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/5 blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-accent/5 blur-3xl"></div>
-
-      <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
-        <AnimatedSection className="space-y-12">
-          <motion.div
-            className="badge"
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
             DESIGN & DEVELOPMENT
           </motion.div>
-<<<<<<< HEAD
           <h1 className="heading-1 leading-tight break-words text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
             <CharacterReveal text="Elevating digital" delay={0.3} />
             <br className="hidden md:block" />{" "}
@@ -416,17 +284,6 @@ function HeroSection() {
           </h1>
           <motion.p
             className="text-body-lg max-w-lg break-words text-sm sm:text-base md:text-lg"
-=======
-          <h1 className="heading-1 leading-tight">
-            <CharacterReveal text="Elevating digital" delay={0.3} />
-            <br />
-            <CharacterReveal text="experiences with" delay={0.6} />
-            <br />
-            <AnimatedGradientText text="purpose" className="heading-1" />
-          </h1>
-          <motion.p
-            className="text-body-lg max-w-lg"
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
@@ -435,29 +292,17 @@ function HeroSection() {
             results.
           </motion.p>
           <motion.div
-<<<<<<< HEAD
             className="flex flex-col sm:flex-row gap-3 md:gap-6 w-full sm:w-auto"
-=======
-            className="flex flex-col sm:flex-row gap-6"
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
             <MagneticElement strength={20}>
-<<<<<<< HEAD
               <RippleButton className="btn-primary rounded-none font-light tracking-wider px-4 sm:px-6 md:px-10 py-3 sm:py-4 md:py-5 h-auto relative overflow-hidden group w-full sm:w-auto text-sm md:text-base">
                 <SmoothScrollLink to="#contact" className="flex items-center justify-center">
                   <span className="relative z-10">Get Started</span>
                   <motion.span
                     className="inline-block ml-2 md:ml-3 relative z-10"
-=======
-              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-10 py-5 h-auto relative overflow-hidden group">
-                <SmoothScrollLink to="#contact" className="flex items-center">
-                  <span className="relative z-10">Get Started</span>
-                  <motion.span
-                    className="inline-block ml-3 relative z-10"
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
                     initial={{ x: 0 }}
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
@@ -468,26 +313,16 @@ function HeroSection() {
                 </SmoothScrollLink>
               </RippleButton>
             </MagneticElement>
-<<<<<<< HEAD
             <RippleButton className="btn-outline rounded-none font-light tracking-wider px-4 sm:px-6 md:px-10 py-3 sm:py-4 md:py-5 h-auto w-full sm:w-auto text-sm md:text-base">
               <SmoothScrollLink to="#projects" className="flex items-center justify-center">View My Work</SmoothScrollLink>
             </RippleButton>
           </motion.div>
           <motion.div
             className="pt-3 md:pt-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4"
-=======
-            <RippleButton className="btn-outline rounded-none font-light tracking-wider px-10 py-5 h-auto">
-              <SmoothScrollLink to="#projects">View My Work</SmoothScrollLink>
-            </RippleButton>
-          </motion.div>
-          <motion.div
-            className="pt-6 flex items-center gap-4"
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-<<<<<<< HEAD
             <div className="flex -space-x-1.5 md:-space-x-2">
               <div className="w-6 sm:w-8 md:w-10 h-6 sm:h-8 md:h-10 rounded-full bg-card/50 flex items-center justify-center text-[10px] sm:text-xs">5.0</div>
               <div className="w-6 sm:w-8 md:w-10 h-6 sm:h-8 md:h-10 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
@@ -495,24 +330,11 @@ function HeroSection() {
               <div className="w-6 sm:w-8 md:w-10 h-6 sm:h-8 md:h-10 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
             </div>
             <span className="text-muted-foreground text-[10px] sm:text-xs md:text-sm">
-=======
-            <div className="flex -space-x-2">
-              <div className="w-10 h-10 rounded-full bg-card/50 flex items-center justify-center text-xs">5.0</div>
-              <div className="w-10 h-10 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
-              <div className="w-10 h-10 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
-              <div className="w-10 h-10 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
-            </div>
-            <span className="text-muted-foreground text-sm">
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
               Based on <SmoothCounter value={20} suffix="+" className="text-accent" /> client reviews
             </span>
           </motion.div>
         </AnimatedSection>
-<<<<<<< HEAD
         <AnimatedSection className="relative aspect-square hidden md:block">
-=======
-        <AnimatedSection className="relative aspect-square">
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
           <Card3D className="w-full h-full" intensity={5}>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -526,15 +348,9 @@ function HeroSection() {
                 height={600}
                 className="object-cover rounded-sm border border-border"
               />
-<<<<<<< HEAD
               <GlassCard className="absolute -bottom-8 -left-8 p-4 md:p-6 backdrop-blur-sm border border-border shadow-lg">
                 <p className="text-foreground font-light text-xs md:text-sm">
                   <span className="text-accent block mb-1 md:mb-2">8+ Years Experience</span>
-=======
-              <GlassCard className="absolute -bottom-8 -left-8 p-6 backdrop-blur-sm border border-border shadow-lg">
-                <p className="text-foreground font-light text-sm">
-                  <span className="text-accent block mb-2">8+ Years Experience</span>
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
                   Delivering exceptional digital solutions
                 </p>
               </GlassCard>
@@ -554,7 +370,6 @@ function ClientsSection() {
       divider
     >
       <div className="space-y-12">
-        <ClientLogos />
         <TrustBadges />
       </div>
     </SectionLayout>
@@ -570,9 +385,7 @@ function CaseStudySection() {
       divider
     >
       <div className="space-y-16">
-        <DetailedCaseStudy />
         <AnimatedDivider />
-        <PersonalStory />
       </div>
     </SectionLayout>
   )
