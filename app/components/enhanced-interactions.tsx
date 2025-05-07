@@ -20,41 +20,36 @@ import Link from "next/link"
 // Enhanced Hero Section with advanced animations
 export function EnhancedHero() {
   return (
-<<<<<<< HEAD
-    <section className="container section-spacing-lg flex items-center min-h-[90vh] relative overflow-hidden px-4 md:px-6">
-      <div className="w-full max-w-7xl mx-auto">
-=======
-    <section className="container section-spacing-lg flex items-center min-h-[90vh] relative overflow-hidden">
->>>>>>> ceace3472198200de37decfe24c2c52c7021e300
+    <section className="container section-spacing flex flex-col justify-center min-h-[80vh] relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/5 blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-accent/5 blur-3xl"></div>
+      <div className="hidden sm:block absolute top-1/4 left-1/4 w-40 h-40 md:w-64 md:h-64 rounded-full bg-primary/5 blur-3xl"></div>
+      <div className="hidden sm:block absolute bottom-1/4 right-1/4 w-60 h-60 md:w-96 md:h-96 rounded-full bg-accent/5 blur-3xl"></div>
       <SpotlightCursor />
 
-      <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center relative z-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center relative z-10">
         <motion.div
-          className="space-y-8"
+          className="space-y-6 md:space-y-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
         >
           <motion.div
-            className="badge"
+            className="badge text-xs px-3 py-1 md:text-sm md:px-4 md:py-1.5"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
             DESIGN & DEVELOPMENT
           </motion.div>
-          <h1 className="heading-1 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
             <CharacterReveal text="Elevating digital" delay={0.4} />
             <br />
             <CharacterReveal text="experiences with" delay={0.6} />
             <br />
-            <AnimatedGradientText text="purpose" className="heading-1" />
+            <AnimatedGradientText text="purpose" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light" />
           </h1>
           <motion.p
-            className="text-body-lg max-w-lg"
+            className="text-base sm:text-lg md:text-xl text-body-lg max-w-xs sm:max-w-md md:max-w-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
@@ -63,13 +58,13 @@ export function EnhancedHero() {
             results.
           </motion.p>
           <motion.div
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
           >
             <MagneticElement strength={20}>
-              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-8 py-6 h-auto relative overflow-hidden group">
+              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-6 py-4 sm:px-8 sm:py-6 h-auto relative overflow-hidden group text-base sm:text-lg">
                 <Link href="#contact" className="flex items-center">
                   <span className="relative z-10">Get Started</span>
                   <motion.span
@@ -86,28 +81,28 @@ export function EnhancedHero() {
             </MagneticElement>
             <Button
               variant="outline"
-              className="btn-outline rounded-none font-light tracking-wider px-8 py-6 h-auto"
+              className="btn-outline rounded-none font-light tracking-wider px-6 py-4 sm:px-8 sm:py-6 h-auto text-base sm:text-lg"
               asChild
             >
               <Link href="#projects">View My Work</Link>
             </Button>
           </motion.div>
           <motion.div
-            className="pt-4 flex items-center gap-4"
+            className="pt-3 sm:pt-4 flex items-center gap-3 sm:gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
           >
             <div className="flex -space-x-2">
-              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-xs">5.0</div>
-              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
-              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
-              <div className="w-8 h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-card/50 flex items-center justify-center text-xs">5.0</div>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-card/50 flex items-center justify-center text-accent">★</div>
             </div>
-            <span className="text-muted-foreground text-sm">Based on 20+ client reviews</span>
+            <span className="text-muted-foreground text-xs sm:text-sm">Based on 20+ client reviews</span>
           </motion.div>
         </motion.div>
-        <Card3D className="relative aspect-square" intensity={5}>
+        <Card3D className="relative aspect-square max-w-xs mx-auto md:max-w-full" intensity={5}>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -116,17 +111,17 @@ export function EnhancedHero() {
             <img
               src="/placeholder.svg?height=600&width=600"
               alt="Digital Experience Design"
-              className="object-cover rounded-sm border border-border"
+              className="object-cover rounded-sm border border-border w-full h-auto"
               width={600}
               height={600}
             />
             <motion.div
-              className="absolute -bottom-6 -left-6 p-4 backdrop-blur-sm border border-border shadow-lg bg-background/60"
+              className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 p-3 sm:p-4 backdrop-blur-sm border border-border shadow-lg bg-background/60"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1, duration: 0.5 }}
             >
-              <p className="text-foreground font-light text-sm">
+              <p className="text-foreground font-light text-xs sm:text-sm">
                 <span className="text-accent block mb-1">8+ Years Experience</span>
                 Delivering exceptional digital solutions
               </p>
