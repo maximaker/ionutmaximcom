@@ -1,97 +1,94 @@
-"use client"
+'use client';
 
-import Link from "next/link"
-import { Github, Linkedin, Mail, Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import Link from 'next/link';
+import { X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   MagneticElement,
   RippleButton,
   AnimatedMenuIcon,
   AnimatedUnderline,
   SmoothScrollLink,
-} from "./advanced-interactions"
+} from './advanced-interactions';
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState("")
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [showHeader, setShowHeader] = useState(true)
-  const lastScrollY = useRef(0)
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
+      setScrolled(window.scrollY > 20);
 
       // Determine active section
-      const sections = ["services", "projects", "resources", "contact"]
+      const sections = ['services', 'projects', 'resources', 'contact'];
       const currentSection = sections.find((section) => {
-        const elementCheck = document.getElementById(section)
-        if (!elementCheck) return false
+        const elementCheck = document.getElementById(section);
+        if (!elementCheck) return false;
 
-        const rect = elementCheck.getBoundingClientRect()
-        return rect.top <= 100 && rect.bottom >= 100
-      })
+        const rect = elementCheck.getBoundingClientRect();
+        return rect.top <= 100 && rect.bottom >= 100;
+      });
 
       if (currentSection) {
-        setActiveSection(currentSection)
+        setActiveSection(currentSection);
       }
 
       // Scroll direction logic
       if (window.scrollY < 10) {
-        setShowHeader(true)
+        setShowHeader(true);
       } else if (window.scrollY > lastScrollY.current) {
-        setShowHeader(false) // scrolling down
+        setShowHeader(false); // scrolling down
       } else {
-        setShowHeader(true) // scrolling up
+        setShowHeader(true); // scrolling up
       }
-      lastScrollY.current = window.scrollY
-    }
+      lastScrollY.current = window.scrollY;
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <motion.header
       initial={{ opacity: 1, y: 0 }}
       animate={showHeader ? { opacity: 1, y: 0 } : { opacity: 0, y: -40 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         scrolled
-          ? "border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-          : "bg-transparent"
+          ? 'border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60'
+          : 'bg-transparent'
       }`}
     >
       <div className="container flex h-20 items-center justify-between">
-        <Link href="/" className="font-light text-xl tracking-wider text-foreground group">
-          <motion.span className="inline-block" whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
-            ionut
-          </motion.span>
-          <motion.span
-            className="text-accent inline-block"
-            whileHover={{ x: 5 }}
-            transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
-          >
-            maxim
-          </motion.span>
+        <Link href="/" className="flex items-center" aria-label="Home">
+          <img
+            src="/logo.svg"
+            alt="Ionut Maxim logo"
+            width={120}
+            height={40}
+            style={{ display: 'block' }}
+          />
         </Link>
         <nav className="hidden md:flex gap-8">
           {[
-            { name: "About", href: "/about" },
-            { name: "Services", href: "#services" },
-            { name: "Work", href: "#projects" },
-            { name: "Resources", href: "#resources" },
-            { name: "Contact", href: "#contact" },
+            { name: 'About', href: '/about' },
+            { name: 'Services', href: '#services' },
+            { name: 'Work', href: '#projects' },
+            { name: 'Resources', href: '#resources' },
+            { name: 'Contact', href: '#contact' },
           ].map((item) => (
             <SmoothScrollLink
               key={item.name}
               to={item.href}
               className={`text-sm font-light tracking-wider relative ${
                 activeSection === item.href.substring(1)
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? 'text-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               <AnimatedUnderline>{item.name}</AnimatedUnderline>
@@ -107,7 +104,7 @@ export default function Header() {
                   className="inline-block ml-2 relative z-10"
                   initial={{ x: 0 }}
                   whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
                 >
                   →
                 </motion.span>
@@ -152,11 +149,11 @@ export default function Header() {
               }}
             >
               {[
-                { name: "About", href: "/about" },
-                { name: "Services", href: "#services" },
-                { name: "Work", href: "#projects" },
-                { name: "Resources", href: "#resources" },
-                { name: "Contact", href: "#contact" },
+                { name: 'About', href: '/about' },
+                { name: 'Services', href: '#services' },
+                { name: 'Work', href: '#projects' },
+                { name: 'Resources', href: '#resources' },
+                { name: 'Contact', href: '#contact' },
               ].map((item) => (
                 <motion.div
                   key={item.name}
@@ -182,9 +179,7 @@ export default function Header() {
                 }}
                 className="pt-8"
               >
-                <RippleButton
-                  className="btn-primary rounded-none font-light tracking-wider px-6 py-6 h-auto w-full"
-                >
+                <RippleButton className="btn-primary rounded-none font-light tracking-wider px-6 py-6 h-auto w-full">
                   <span onClick={() => setIsMenuOpen(false)}>
                     <SmoothScrollLink to="#contact" className="block">
                       Get a Quote
@@ -197,5 +192,5 @@ export default function Header() {
         )}
       </AnimatePresence>
     </motion.header>
-  )
-} 
+  );
+}
