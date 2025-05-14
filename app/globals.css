@@ -1,0 +1,573 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 30% 98%;
+    --foreground: 20 40% 10%;
+
+    --card: 30 30% 100%;
+    --card-foreground: 20 40% 10%;
+
+    --popover: 30 30% 100%;
+    --popover-foreground: 20 40% 10%;
+
+    --primary: 217 50% 45%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 30 20% 92%;
+    --secondary-foreground: 20 40% 10%;
+
+    --muted: 30 20% 92%;
+    --muted-foreground: 20 40% 30%;
+
+    --accent: 28 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 20 30% 85%;
+    --input: 20 30% 85%;
+    --ring: 28 100% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 20 30% 5%;
+    --foreground: 210 40% 98%;
+
+    --card: 20 30% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 20 30% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 50% 49%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 20 30% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 20 30% 12%;
+    --muted-foreground: 210 40% 70%;
+
+    --accent: 28 100% 53%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 20 30% 15%;
+    --input: 20 30% 15%;
+    --ring: 28 100% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    line-height: 1.7;
+    /* Fix for content visibility */
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Fix for z-index stacking context */
+  main,
+  section,
+  div {
+    position: relative;
+  }
+}
+
+/* Custom outline text effect */
+.outline-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+  color: transparent;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.dark .outline-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+}
+
+.light .outline-text {
+  -webkit-text-stroke: 1px rgba(43, 30, 20, 0.8);
+}
+
+.outline-text:hover {
+  -webkit-text-stroke-width: 1.5px;
+  text-shadow: 0 0 20px rgba(255, 122, 16, 0.2);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary/50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-secondary/80;
+}
+
+/* Selection styling */
+::selection {
+  @apply bg-accent/30 text-foreground;
+}
+
+/* Animation for skeleton loading */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite linear;
+  background-size: 200% 100%;
+}
+
+/* Enhance focus styles for better accessibility and visual feedback */
+:focus-visible {
+  outline: 2px solid hsl(var(--accent));
+  outline-offset: 2px;
+}
+
+/* Improved button focus states */
+button:focus-visible,
+a:focus-visible {
+  @apply outline-accent outline-2 outline-offset-2;
+}
+
+/* Skip link styling */
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Background gradients */
+.bg-gradient-brown-dark {
+  background: linear-gradient(to bottom, hsl(20 30% 10%), hsl(20 30% 5%));
+}
+
+.bg-gradient-brown-light {
+  background: linear-gradient(to bottom, hsl(30 30% 96%), hsl(30 30% 92%));
+}
+
+/* Theme transition */
+.theme-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Glass effect */
+.glass-effect {
+  @apply bg-background/30 backdrop-blur-sm border-l-2 border-l-accent/20 pl-8 shadow-none;
+}
+
+/* Card styles */
+.card-style {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  @apply bg-transparent border-l-2 border-l-accent/20 pl-8 rounded-none shadow-none hover:border-l-accent mb-8;
+}
+
+.card-style:hover {
+  transform: translateY(-2px);
+}
+
+/* Button styles */
+.btn-primary {
+  @apply bg-accent text-accent-foreground hover:bg-accent/90 shadow-md hover:shadow-lg transition-all duration-200;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm hover:shadow transition-all duration-200;
+}
+
+.btn-outline {
+  @apply bg-transparent border border-border text-foreground hover:bg-secondary/50 transition-all duration-200;
+}
+
+/* Consistent spacing - INCREASED FOR AIRINESS */
+.section-spacing {
+  @apply py-28 md:py-36;
+}
+
+.section-spacing-lg {
+  @apply py-36 md:py-44;
+}
+
+.section-spacing-xl {
+  @apply py-16 sm:py-24 md:py-40 lg:py-52;
+}
+
+/* Consistent container padding */
+.container-padding {
+  @apply px-6 sm:px-8 lg:px-12;
+}
+
+/* Consistent heading styles - ENHANCED VISUAL HIERARCHY */
+.heading-1 {
+  @apply text-5xl md:text-6xl lg:text-7xl font-light tracking-wide text-foreground leading-tight mb-8;
+  letter-spacing: -0.02em;
+}
+
+.heading-2 {
+  @apply text-4xl md:text-5xl font-light tracking-wide text-foreground leading-tight mb-6;
+  letter-spacing: -0.01em;
+}
+
+.heading-3 {
+  @apply text-2xl md:text-3xl font-light tracking-wide text-foreground leading-tight mb-4;
+}
+
+.heading-4 {
+  @apply text-xl font-light tracking-wide text-foreground mb-3;
+}
+
+/* Badge styles - REDUCED VISUAL IMPACT */
+.badge {
+  @apply inline-block px-4 py-1 bg-accent/5 border border-accent/20 text-accent/70 text-sm tracking-wider;
+}
+
+/* Section title styles - REDUCED VISUAL IMPACT WHEN NOT IN FOCUS */
+.section-title {
+  @apply opacity-70 transition-opacity duration-300;
+}
+
+.section-title:hover,
+.section-in-view .section-title {
+  @apply opacity-100;
+}
+
+/* Consistent text styles */
+.text-body {
+  @apply text-muted-foreground font-light leading-relaxed text-base;
+}
+
+.text-body-lg {
+  @apply text-muted-foreground font-light text-xl leading-relaxed;
+}
+
+/* Consistent form styles */
+.form-input {
+  @apply w-full border border-border bg-card/50 px-6 py-3 text-foreground focus:outline-none focus:ring-0 transition-colors rounded-sm;
+}
+
+.form-label {
+  @apply text-sm font-light text-foreground tracking-wider mb-3 block;
+}
+
+/* Consistent grid layouts */
+.grid-cols-responsive {
+  @apply grid gap-12 md:grid-cols-2 lg:grid-cols-3;
+}
+
+/* Consistent section dividers */
+.section-divider {
+  @apply border-t border-border/30 pt-16 md:pt-20 mt-16 md:mt-20;
+}
+
+/* Add these animation keyframes at the end of the file */
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add these utility classes */
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-shine {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shine 3s infinite;
+}
+
+.animate-gradient-x {
+  animation: gradient-x 8s ease infinite;
+}
+
+/* Add subtle hover transitions to all interactive elements */
+a,
+button,
+input,
+select,
+textarea {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Add subtle scale effect to buttons */
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Add subtle transition to form elements */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: hsl(var(--accent));
+  box-shadow: 0 0 0 2px hsla(var(--accent), 0.1);
+}
+
+/* Enhance button hover states */
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-outline:hover {
+  @apply transform transition-all duration-200;
+}
+
+/* Add subtle hover effect to links */
+a:not(.btn-primary):not(.btn-secondary):not(.btn-outline) {
+  position: relative;
+  @apply transition-all duration-200;
+}
+a:not(.btn-primary):not(.btn-secondary):not(.btn-outline)::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: hsl(var(--accent));
+  transition: width 0.3s ease;
+}
+
+a:not(.btn-primary):not(.btn-secondary):not(.btn-outline):hover::after {
+  width: 100%;
+}
+a:not(.btn-primary):not(.btn-secondary):not(.btn-outline):hover {
+  @apply text-accent;
+}
+
+/* Add these new spacing utility classes for better visual hierarchy */
+.content-spacing-sm {
+  @apply space-y-8;
+}
+
+.content-spacing-md {
+  @apply space-y-16;
+}
+
+.content-spacing-lg {
+  @apply space-y-24;
+}
+
+/* Section layout specific styles */
+@media (min-width: 768px) {
+  .section-title-sticky {
+    position: sticky;
+    top: 8rem;
+    align-self: flex-start;
+  }
+}
+
+/* Container max-width adjustments for more breathing room */
+.container {
+  @apply px-6 md:px-8 lg:px-12;
+  max-width: 1400px;
+}
+
+/* Enhanced paragraph spacing */
+p {
+  margin-bottom: 1.8em;
+  max-width: 70ch;
+}
+
+/* Improved list spacing */
+ul,
+ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5em;
+}
+
+li {
+  margin-bottom: 0.75em;
+}
+
+/* Button size and spacing adjustments */
+.btn-primary,
+.btn-secondary,
+.btn-outline {
+  @apply px-8 py-4 text-base;
+}
+
+/* Modal overlay styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.modal-content {
+  @apply bg-card border border-border shadow-lg max-w-lg w-full p-8 relative;
+}
+
+/* Resources section - less crowded */
+.resources-grid {
+  @apply grid gap-16;
+}
+
+.resources-card {
+  @apply p-8 space-y-6;
+}
+
+/* Fix for z-index issues */
+.z-0 {
+  z-index: 0;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-20 {
+  z-index: 20;
+}
+.z-30 {
+  z-index: 30;
+}
+.z-40 {
+  z-index: 40;
+}
+.z-50 {
+  z-index: 50;
+}
+.z-60 {
+  z-index: 60;
+}
+.z-70 {
+  z-index: 70;
+}
+.z-80 {
+  z-index: 80;
+}
+.z-90 {
+  z-index: 90;
+}
+.z-100 {
+  z-index: 100;
+}
+
+/* Fix for content visibility */
+.content-visible {
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+  position: relative;
+}
+
+/* Fix for cursor issues */
+.custom-cursor {
+  z-index: 9999 !important;
+  pointer-events: none !important;
+}
+
+/* Ensure modals and overlays don't interfere with cursor */
+.modal-overlay * {
+  cursor: auto !important;
+}
+
+/* Resource icons */
+.resource-icon {
+  @apply h-12 w-12 text-accent mb-6;
+}
+
+/* Add this to ensure main content is visible */
+main {
+  position: relative;
+  z-index: 10;
+}
+
+/* Ensure sections have proper z-index */
+section {
+  position: relative;
+  z-index: 10;
+}
+
+/* Fix for background elements that might be covering content */
+.absolute {
+  z-index: 0;
+}
