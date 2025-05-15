@@ -20,7 +20,6 @@ import { FreeConsultationCTA } from './components/value-elements';
 // Import UI enhancement components
 import {
   CustomCursor,
-  BackToTop,
   AnimatedSection,
   ParallaxBackground,
   LazyImage,
@@ -85,7 +84,6 @@ export default function LandingPage() {
         <ContactSection />
       </main>
       <Footer />
-      <BackToTop />
       <ToastManager />
       <ScrollProgressBar className="!fixed bottom-0 left-0 w-full z-50" />
     </div>
