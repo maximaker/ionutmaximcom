@@ -1,10 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Github, Linkedin, Mail, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 // Import trust-building components
 import {
@@ -201,80 +200,6 @@ function Header() {
           <AnimatedMenuIcon isOpen={isMenuOpen} toggle={() => setIsMenuOpen(!isMenuOpen)} />
         </div>
       </div>
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            className="fixed inset-0 z-[9999] bg-background"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="container flex h-20 items-center justify-between">
-              <Link href="/" className="font-light text-xl tracking-wider text-foreground">
-                ionut<span className="text-accent">maxim</span>
-              </Link>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsMenuOpen(false)}
-                aria-label="Close Menu"
-                className="text-foreground hover:bg-background/10 rounded-full w-10 h-10"
-              >
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-            <motion.nav
-              className="container grid gap-8 py-12"
-              initial="closed"
-              animate="open"
-              variants={{
-                open: { transition: { staggerChildren: 0.1 } },
-                closed: {},
-              }}
-            >
-              {[
-                { name: 'About', href: '/about' },
-                { name: 'Services', href: '#services' },
-                { name: 'Work', href: '#projects' },
-                { name: 'Resources', href: '#resources' },
-                { name: 'Contact', href: '#contact' },
-              ].map((item) => (
-                <motion.div
-                  key={item.name}
-                  variants={{
-                    open: { opacity: 1, y: 0 },
-                    closed: { opacity: 0, y: 20 },
-                  }}
-                >
-                  <span onClick={() => setIsMenuOpen(false)}>
-                    <SmoothScrollLink
-                      to={item.href}
-                      className="text-2xl font-extralight tracking-wider text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <AnimatedUnderline>{item.name}</AnimatedUnderline>
-                    </SmoothScrollLink>
-                  </span>
-                </motion.div>
-              ))}
-              <motion.div
-                variants={{
-                  open: { opacity: 1, y: 0 },
-                  closed: { opacity: 0, y: 20 },
-                }}
-                className="pt-8"
-              >
-                <RippleButton className="btn-primary rounded-none font-light tracking-wider px-6 py-6 h-auto w-full">
-                  <span onClick={() => setIsMenuOpen(false)}>
-                    <SmoothScrollLink to="#contact" className="block">
-                      Get a Quote
-                    </SmoothScrollLink>
-                  </span>
-                </RippleButton>
-              </motion.div>
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.header>
   );
 }
