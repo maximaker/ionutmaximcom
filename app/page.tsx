@@ -134,10 +134,12 @@ function Header() {
       initial={{ opacity: 1, y: 0 }}
       animate={showHeader ? { opacity: 1, y: 0 } : { opacity: 0, y: -40 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60'
-          : 'bg-transparent'
+      className={`transition-all duration-300 w-full ${
+        isMenuOpen
+          ? 'fixed inset-0 h-screen z-[9999] bg-background md:sticky md:top-0 md:h-20 md:border-b md:border-border md:bg-background/80 md:backdrop-blur md:supports-[backdrop-filter]:bg-background/60'
+          : scrolled
+            ? 'sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60'
+            : 'sticky top-0 z-40 bg-transparent'
       }`}
     >
       <div className="container flex h-20 items-center justify-between">
@@ -200,6 +202,41 @@ function Header() {
           <AnimatedMenuIcon isOpen={isMenuOpen} toggle={() => setIsMenuOpen(!isMenuOpen)} />
         </div>
       </div>
+      {/* Mobile expanding menu */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-[9999] bg-background flex flex-col items-start gap-8 px-6 py-12 md:hidden w-full h-screen overflow-y-auto">
+          {[
+            { name: 'About', href: '/about' },
+            { name: 'Services', href: '#services' },
+            { name: 'Work', href: '#projects' },
+            { name: 'Resources', href: '#resources' },
+            { name: 'Contact', href: '#contact' },
+          ].map((item) => (
+            <span key={item.name} onClick={() => setIsMenuOpen(false)}>
+              <SmoothScrollLink
+                to={item.href}
+                className="text-2xl font-extralight tracking-wider text-muted-foreground hover:text-foreground transition-colors w-full text-left"
+              >
+                <AnimatedUnderline>{item.name}</AnimatedUnderline>
+              </SmoothScrollLink>
+            </span>
+          ))}
+          <RippleButton className="btn-primary w-full mt-8 text-xl font-light h-12 px-6 rounded-full flex items-center justify-center">
+            <span onClick={() => setIsMenuOpen(false)}>
+              <SmoothScrollLink to="#contact" className="block">
+                Get a Quote
+              </SmoothScrollLink>
+            </span>
+          </RippleButton>
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close Menu"
+            className="text-foreground hover:bg-background/10 rounded-full w-10 h-10 absolute top-6 right-6"
+          >
+            &#10005;
+          </button>
+        </div>
+      )}
     </motion.header>
   );
 }
