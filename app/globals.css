@@ -76,6 +76,9 @@
     /* Fix for content visibility */
     overflow-x: hidden;
     position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    /* CustomCursor: hide default cursor */
+    cursor: none;
   }
 
   /* Smooth scrolling */
@@ -195,7 +198,9 @@ a:focus-visible {
 
 /* Card styles */
 .card-style {
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
   @apply bg-transparent border-l-2 border-l-accent/20 pl-8 rounded-none shadow-none hover:border-l-accent mb-8;
 }
 
@@ -236,21 +241,25 @@ a:focus-visible {
 
 /* Consistent heading styles - ENHANCED VISUAL HIERARCHY */
 .heading-1 {
-  @apply text-5xl md:text-6xl lg:text-7xl font-light tracking-wide text-foreground leading-tight mb-8;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  @apply font-light tracking-wide text-foreground leading-tight mb-8;
   letter-spacing: -0.02em;
 }
 
 .heading-2 {
-  @apply text-4xl md:text-5xl font-light tracking-wide text-foreground leading-tight mb-6;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  @apply font-light tracking-wide text-foreground leading-tight mb-6;
   letter-spacing: -0.01em;
 }
 
 .heading-3 {
-  @apply text-2xl md:text-3xl font-light tracking-wide text-foreground leading-tight mb-4;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  @apply font-light tracking-wide text-foreground leading-tight mb-4;
 }
 
 .heading-4 {
-  @apply text-xl font-light tracking-wide text-foreground mb-3;
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  @apply font-light tracking-wide text-foreground mb-3;
 }
 
 /* Badge styles - REDUCED VISUAL IMPACT */
@@ -401,7 +410,7 @@ a:not(.btn-primary):not(.btn-secondary):not(.btn-outline) {
   @apply transition-all duration-200;
 }
 a:not(.btn-primary):not(.btn-secondary):not(.btn-outline)::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 0;
   height: 1px;
@@ -570,4 +579,14 @@ section {
 /* Fix for background elements that might be covering content */
 .absolute {
   z-index: 0;
+}
+
+/* CustomCursor: hide default cursor */
+a,
+button,
+[role='button'],
+[type='button'],
+[type='submit'],
+[type='reset'] {
+  cursor: none;
 }
