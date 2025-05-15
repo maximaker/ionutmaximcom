@@ -17,9 +17,6 @@ import {
 // Import value-adding components
 import { FreeConsultationCTA } from './components/value-elements';
 
-// Import engagement components
-import { LiveChatButton } from './components/engagement-elements';
-
 // Import UI enhancement components
 import {
   CustomCursor,
@@ -88,7 +85,6 @@ export default function LandingPage() {
         <ContactSection />
       </main>
       <Footer />
-      <LiveChatButton />
       <BackToTop />
       <ToastManager />
       <ScrollProgressBar className="!fixed bottom-0 left-0 w-full z-50" />
