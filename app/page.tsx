@@ -24,7 +24,6 @@ import { LiveChatButton } from './components/engagement-elements';
 import {
   CustomCursor,
   BackToTop,
-  ThemeToggle,
   AnimatedSection,
   ParallaxBackground,
   LazyImage,
@@ -91,7 +90,6 @@ export default function LandingPage() {
       <Footer />
       <LiveChatButton />
       <BackToTop />
-      <ThemeToggle />
       <ToastManager />
       <ScrollProgressBar className="!fixed bottom-0 left-0 w-full z-50" />
     </div>
