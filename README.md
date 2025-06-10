@@ -29,24 +29,24 @@ A modern, mobile-first, and highly optimized portfolio website built with Next.j
 
 ### 1. Clone the repo
 
-```bash
+\`\`\`bash
 git clone https://github.com/maximaker/ionutmaximcom.git
 cd ionutmaximcom
-```
+\`\`\`
 
 ### 2. Install dependencies
 
-```bash
+\`\`\`bash
 npm install
 # or
 pnpm install
-```
+\`\`\`
 
 ### 3. Run the development server
 
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 Visit [http://localhost:3000](http://localhost:3000) to view the site.
 
@@ -79,7 +79,7 @@ Visit [http://localhost:3000](http://localhost:3000) to view the site.
 
 ## 🗂️ Project Structure
 
-```
+\`\`\`
 .
 ├── app/                # Next.js app directory (pages, layouts, sections)
 │   ├── components/     # Page-specific and shared components
@@ -92,7 +92,7 @@ Visit [http://localhost:3000](http://localhost:3000) to view the site.
 ├── .husky/             # Husky git hooks
 ├── .next/              # Next.js build output (auto-generated)
 ├── ...                 # Config and root files
-```
+\`\`\`
 
 - **`app/`**: Main application logic, layouts, and page sections
 - **`components/`**: Reusable UI components

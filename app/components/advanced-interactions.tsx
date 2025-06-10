@@ -21,7 +21,7 @@ export function MagneticElement({
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
-  const springConfig = { damping: 15, stiffness: 150 }
+  const springConfig = { damping: 20, stiffness: 350, mass: 0.5 }
   const springX = useSpring(x, springConfig)
   const springY = useSpring(y, springConfig)
 
@@ -410,7 +410,7 @@ export function ScrollProgressBar({
   }, [])
 
   return (
-    <div className={`fixed bottom-1 left-1 right-1 h-[1px] z-50 ${className}`} style={{ height: '1px' }}>
+    <div className={`fixed bottom-1 left-1 right-1 h-[1px] z-50 ${className}`} style={{ height: "1px" }}>
       <div
         className="h-full transition-all duration-100 ease-out"
         style={{
@@ -690,18 +690,18 @@ export function AnimatedDivider({
 // Add these styles to globals.css
 export const globalStyles = `
 @keyframes gradient-x {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+0% {
+  background-position: 0% 50%;
+}
+50% {
+  background-position: 100% 50%;
+}
+100% {
+  background-position: 0% 50%;
+}
 }
 
 .animate-gradient-x {
-  animation: gradient-x 8s ease infinite;
+animation: gradient-x 8s ease infinite;
 }
 `
