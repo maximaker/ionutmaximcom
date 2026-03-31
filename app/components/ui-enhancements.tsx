@@ -233,6 +233,7 @@ export function AnimatedSection({
   }, [])
 
   useEffect(() => {
+    const currentRef = ref.current
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -246,13 +247,13 @@ export function AnimatedSection({
       },
     )
 
-    if (ref.current) {
-      observer.observe(ref.current)
+    if (currentRef) {
+      observer.observe(currentRef)
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [])
@@ -282,7 +283,6 @@ export function AnimatedSection({
 export function ParallaxBackground() {
   const [scrollY, setScrollY] = useState(0)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
-  const requestRef = useRef<number>()
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -293,20 +293,15 @@ export function ParallaxBackground() {
     return () => mediaQuery.removeEventListener("change", handleChange)
   }, [])
 
-  const animate = () => {
-    setScrollY(window.scrollY)
-    requestRef.current = requestAnimationFrame(animate)
-  }
-
   useEffect(() => {
-    if (!prefersReducedMotion) {
-      requestRef.current = requestAnimationFrame(animate)
+    if (prefersReducedMotion) return
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
     }
-    return () => {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current)
-      }
-    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [prefersReducedMotion])
 
   if (prefersReducedMotion) {
@@ -336,7 +331,7 @@ export function ParallaxBackground() {
         transition={{ type: "tween", ease: "linear" }}
       />
       <motion.div
-        className="absolute bottom-1/3 left-1/3 w-64 h-64 rounded-full bg-meralgun-500/5 blur-3xl"
+        className="absolute bottom-1/3 left-1/3 w-64 h-64 rounded-full bg-accent/5 blur-3xl"
         style={{
           x: -scrollY * 0.03,
           y: scrollY * 0.04,
@@ -386,6 +381,7 @@ export function LazyImage({
   const imgRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const currentRef = imgRef.current
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -398,13 +394,13 @@ export function LazyImage({
       },
     )
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current)
+    if (currentRef) {
+      observer.observe(currentRef)
     }
 
     return () => {
-      if (imgRef.current) {
-        observer.unobserve(imgRef.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [])

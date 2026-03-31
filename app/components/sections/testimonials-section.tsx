@@ -1,6 +1,6 @@
 "use client"
 
-import { CharacterReveal, Card3D, SmoothCounter, RippleButton, SmoothScrollLink } from "../advanced-interactions"
+import { CharacterReveal, SmoothCounter, RippleButton, SmoothScrollLink } from "../advanced-interactions"
 import { StaggeredFadeIn } from "../advanced-interactions"
 import { SectionLayout } from "../section-layout"
 import { LazyImage } from "../ui-enhancements"
@@ -9,23 +9,23 @@ export function TestimonialsSection() {
   const testimonials = [
     {
       quote:
-        "Ionut delivered a website that perfectly captures our brand essence while driving significant improvements in user engagement and conversions.",
-      author: "Sarah Johnson",
-      position: "Marketing Director, Brand Co.",
+        "In the more than 5 years that I've worked with Max, I've always been impressed with his ability to fully grasp a project and deliver more than what was asked. He's very creative.",
+      author: "Riel Roussopoulos",
+      position: "Product Manager, iXLd Media",
       image: "/placeholder.svg?height=80&width=80",
     },
     {
       quote:
-        "Working with Ionut was a game-changer for our digital presence. His attention to detail and strategic approach resulted in a 40% increase in leads.",
-      author: "Michael Chen",
-      position: "CEO, Tech Innovations",
+        "Collaboration with Max went without a hitch. He also offered plenty of insights and suggestions that went beyond the original scope — a true strategic partner.",
+      author: "Alex Negru",
+      position: "CEO, Minutizer",
       image: "/placeholder.svg?height=80&width=80",
     },
     {
       quote:
-        "The redesign exceeded our expectations. Ionut's ability to balance aesthetics with functionality created an experience our customers love.",
-      author: "Emma Rodriguez",
-      position: "Product Manager, Design Studio",
+        "We've worked with Max a number of times on various projects. He has always over-delivered and delivered quickly. A reliable partner you can count on.",
+      author: "Bob Landstrom",
+      position: "Principal, Green Circle",
       image: "/placeholder.svg?height=80&width=80",
     },
   ]
@@ -34,7 +34,7 @@ export function TestimonialsSection() {
     <SectionLayout
       badge="TESTIMONIALS"
       title={<CharacterReveal text="What clients are saying" />}
-      subtitle="Don't just take my word for it. Here's what clients have to say about working together."
+      subtitle="Don't just take my word for it — here's what real clients have to say about working together."
       divider
     >
       <div className="relative">
@@ -43,57 +43,44 @@ export function TestimonialsSection() {
 
         <StaggeredFadeIn className="grid gap-16" staggerDelay={0.2}>
           {testimonials.map((testimonial, index) => (
-            <Card3D key={index} className="h-full">
-              <div className="card-style py-8 relative h-full content-spacing-md">
-                <div className="absolute -top-6 -left-6 text-5xl text-accent opacity-50">"</div>
-                <p className="text-foreground/90 font-light text-xl leading-relaxed relative z-10 mb-8">
-                  {testimonial.quote}
-                </p>
-                <div className="flex items-center gap-6">
-                  <LazyImage
-                    src={testimonial.image || "/placeholder.svg"}
-                    alt={testimonial.author}
-                    width={60}
-                    height={60}
-                    className="rounded-full object-cover"
-                  />
-                  <div>
-                    <p className="text-foreground font-light text-lg">{testimonial.author}</p>
-                    <p className="text-muted-foreground">{testimonial.position}</p>
-                  </div>
+            <div key={index} className="quote-card group">
+              <p className="text-foreground/80 font-extralight text-xl md:text-2xl leading-relaxed mb-8 relative z-10">
+                {testimonial.quote}
+              </p>
+              <div className="flex items-center gap-4">
+                <LazyImage
+                  src={testimonial.image || "/placeholder.svg"}
+                  alt={testimonial.author}
+                  width={40}
+                  height={40}
+                  className="rounded-full object-cover opacity-80"
+                />
+                <div>
+                  <p className="text-foreground text-sm font-light tracking-wide">{testimonial.author}</p>
+                  <p className="text-muted-foreground text-xs font-light">{testimonial.position}</p>
                 </div>
               </div>
-            </Card3D>
+            </div>
           ))}
         </StaggeredFadeIn>
 
-        <div className="mt-24">
-          <Card3D>
-            <div className="glass-effect py-12 text-left content-spacing-md">
-              <div className="flex mb-6">
-                <div className="flex">
-                  <div className="text-accent text-xl">★</div>
-                  <div className="text-accent text-xl">★</div>
-                  <div className="text-accent text-xl">★</div>
-                  <div className="text-accent text-xl">★</div>
-                  <div className="text-accent text-xl">★</div>
-                </div>
+        <div className="mt-20 pt-12 border-t border-border/20">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <div>
+              <span className="text-accent text-sm tracking-wider block mb-3">★★★★★</span>
+              <div className="text-foreground/80 font-light text-lg md:text-xl">
+                <span className="inline-block align-baseline"><SmoothCounter value={100} suffix="%" className="text-accent font-normal" /></span>
+                <span> satisfaction across </span>
+                <span className="inline-block align-baseline"><SmoothCounter value={20} suffix="+" className="text-accent font-normal" /></span>
+                <span> projects</span>
               </div>
-              <div className="text-foreground/90 font-light text-2xl mb-8">
-                <span>"</span>
-                <span className="inline-block align-baseline"><SmoothCounter value={100} suffix="%" /></span>
-                <span> satisfaction rate based on </span>
-                <span className="inline-block align-baseline"><SmoothCounter value={20} suffix="+" /></span>
-                <span> client projects"</span>
-              </div>
-              <RippleButton className="btn-primary rounded-none font-light tracking-wider px-10 py-5 h-auto relative overflow-hidden group">
-                <SmoothScrollLink to="#contact" className="block">
-                  <span className="relative z-10">Start Your Project</span>
-                  <span className="absolute inset-0 bg-accent/80 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
-                </SmoothScrollLink>
-              </RippleButton>
             </div>
-          </Card3D>
+            <RippleButton className="btn-primary rounded-none tracking-widest text-xs uppercase px-8 py-4 h-auto flex-shrink-0">
+              <SmoothScrollLink to="#contact" className="block">
+                Start Your Project →
+              </SmoothScrollLink>
+            </RippleButton>
+          </div>
         </div>
       </div>
     </SectionLayout>

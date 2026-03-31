@@ -6,7 +6,7 @@ import { AnimatedSection } from "./ui-enhancements"
 
 interface SectionLayoutProps {
   id?: string
-  title: string
+  title: ReactNode
   subtitle?: string
   badge?: string
   children: ReactNode
@@ -27,6 +27,7 @@ export function SectionLayout({
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    const currentRef = sectionRef.current
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting)
@@ -37,13 +38,13 @@ export function SectionLayout({
       },
     )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+    if (currentRef) {
+      observer.observe(currentRef)
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [])
@@ -53,19 +54,18 @@ export function SectionLayout({
       id={id}
       ref={sectionRef}
       className={`container px-4 ${divider ? "section-divider" : ""} section-spacing-xl ${className} ${isInView ? "section-in-view" : ""}`}
-      style={{ position: "relative", zIndex: 10 }}
     >
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20 lg:gap-28">
+      <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] gap-10 md:gap-12 lg:gap-20">
         <AnimatedSection className="md:sticky md:top-32 self-start">
-          <div className="content-spacing-md text-left">
-            {badge && <div className="badge mb-8">{badge}</div>}
-            <h2 className={`heading-2 mb-8 section-title ${isInView ? "opacity-100" : "opacity-50"}`}>{title}</h2>
-            {subtitle && <p className="text-body-lg max-width-prose">{subtitle}</p>}
+          <div className="space-y-5 text-left">
+            {badge && <div className="badge">{badge}</div>}
+            <h2 className={`heading-2 section-title ${isInView ? "opacity-100" : "opacity-50"}`}>{title}</h2>
+            {subtitle && <p className="text-muted-foreground text-sm md:text-base font-light leading-relaxed">{subtitle}</p>}
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="md:col-span-2">
-          <div className="text-left space-y-16 content-visible">{children}</div>
+        <AnimatedSection>
+          <div className="text-left space-y-12 content-visible">{children}</div>
         </AnimatedSection>
       </div>
     </section>

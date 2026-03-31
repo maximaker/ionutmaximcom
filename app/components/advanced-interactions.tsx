@@ -1,12 +1,10 @@
 "use client"
 
 import React from "react"
-
 import { useState, useEffect, useRef } from "react"
 import { motion, useAnimation, useMotionValue, useSpring } from "framer-motion"
 import { useTheme } from "next-themes"
 
-// Magnetic element that attracts the cursor
 export function MagneticElement({
   children,
   className = "",
@@ -27,16 +25,11 @@ export function MagneticElement({
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return
-
     const rect = ref.current.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
-
-    const distanceX = e.clientX - centerX
-    const distanceY = e.clientY - centerY
-
-    x.set(distanceX / strength)
-    y.set(distanceY / strength)
+    x.set((e.clientX - centerX) / strength)
+    y.set((e.clientY - centerY) / strength)
   }
 
   const handleMouseLeave = () => {
@@ -52,17 +45,13 @@ export function MagneticElement({
       onMouseEnter={() => setHovered(true)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{
-        x: springX,
-        y: springY,
-      }}
+      style={{ x: springX, y: springY }}
     >
       {children}
     </motion.div>
   )
 }
 
-// Text that reveals character by character
 export function CharacterReveal({
   text,
   className = "",
@@ -95,7 +84,6 @@ export function CharacterReveal({
   )
 }
 
-// Smooth scroll link
 export function SmoothScrollLink({
   children,
   to,
@@ -108,16 +96,15 @@ export function SmoothScrollLink({
   offset?: number
 }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // For hash links, smooth scroll; for path links, use default navigation
+    if (!to.startsWith("#")) return
+
     e.preventDefault()
     const target = document.querySelector(to)
     if (!target) return
 
     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset
-
-    window.scrollTo({
-      top: targetPosition,
-      behavior: "smooth",
-    })
+    window.scrollTo({ top: targetPosition, behavior: "smooth" })
   }
 
   return (
@@ -127,55 +114,6 @@ export function SmoothScrollLink({
   )
 }
 
-// Parallax element that moves on scroll
-export function ParallaxElement({
-  children,
-  className = "",
-  speed = 0.2,
-}: {
-  children: React.ReactNode
-  className?: string
-  speed?: number
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [elementTop, setElementTop] = useState(0)
-  const [clientHeight, setClientHeight] = useState(0)
-  const y = useMotionValue(0)
-
-  useEffect(() => {
-    if (!ref.current) return
-
-    const element = ref.current
-    const onResize = () => {
-      setElementTop(element.offsetTop)
-      setClientHeight(window.innerHeight)
-    }
-
-    onResize()
-    window.addEventListener("resize", onResize)
-    return () => window.removeEventListener("resize", onResize)
-  }, [ref])
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (!ref.current) return
-      const scrollY = window.scrollY
-      const yValue = (scrollY - elementTop) * speed
-      y.set(yValue)
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [elementTop, speed, y])
-
-  return (
-    <motion.div ref={ref} className={className} style={{ y }}>
-      {children}
-    </motion.div>
-  )
-}
-
-// Cursor spotlight effect
 export function SpotlightCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
@@ -188,7 +126,6 @@ export function SpotlightCursor() {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
-
     const handleMouseEnter = () => setIsVisible(true)
     const handleMouseLeave = () => setIsVisible(false)
 
@@ -224,69 +161,6 @@ export function SpotlightCursor() {
   )
 }
 
-// Text that follows the cursor
-export function CursorFollowText({
-  text,
-  className = "",
-}: {
-  text: string
-  className?: string
-}) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovered, setIsHovered] = useState(false)
-  const springConfig = { damping: 25, stiffness: 200 }
-  const x = useSpring(mousePosition.x, springConfig)
-  const y = useSpring(mousePosition.y, springConfig)
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePosition({ x: e.clientX, y: e.clientY })
-  }
-
-  return (
-    <div
-      className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onMouseMove={handleMouseMove}
-    >
-      <motion.div
-        className={`fixed pointer-events-none z-50 ${className}`}
-        style={{
-          x: x,
-          y: y,
-          opacity: isHovered ? 1 : 0,
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        {text}
-      </motion.div>
-    </div>
-  )
-}
-
-// Animated underline for links
-export function AnimatedUnderline({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
-  return (
-    <span className={`relative inline-block group ${className}`}>
-      {children}
-      <motion.span
-        className="absolute bottom-0 left-0 w-full h-px bg-accent"
-        initial={{ scaleX: 0 }}
-        whileHover={{ scaleX: 1 }}
-        transition={{ duration: 0.3 }}
-        style={{ originX: 0 }}
-      />
-    </span>
-  )
-}
-
-// Staggered fade-in for lists
 export function StaggeredFadeIn({
   children,
   className = "",
@@ -302,6 +176,7 @@ export function StaggeredFadeIn({
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const currentRef = ref.current
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -312,13 +187,13 @@ export function StaggeredFadeIn({
       { threshold: 0.1 },
     )
 
-    if (ref.current) {
-      observer.observe(ref.current)
+    if (currentRef) {
+      observer.observe(currentRef)
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [controls])
@@ -333,10 +208,7 @@ export function StaggeredFadeIn({
       animate={controls}
       variants={{
         visible: {
-          transition: {
-            staggerChildren: staggerDelay,
-            delayChildren: initialDelay,
-          },
+          transition: { staggerChildren: staggerDelay, delayChildren: initialDelay },
         },
         hidden: {},
       }}
@@ -357,7 +229,6 @@ export function StaggeredFadeIn({
   )
 }
 
-// Animated gradient text
 export function AnimatedGradientText({
   text,
   className = "",
@@ -376,16 +247,13 @@ export function AnimatedGradientText({
   return (
     <span
       className={`bg-clip-text text-transparent bg-gradient-to-r from-accent via-accent/80 to-accent animate-gradient-x ${className}`}
-      style={{
-        backgroundSize: "200% 100%",
-      }}
+      style={{ backgroundSize: "200% 100%" }}
     >
       {text}
     </span>
   )
 }
 
-// Scroll-triggered progress bar
 export function ScrollProgressBar({
   className = "",
   height = 4,
@@ -401,16 +269,15 @@ export function ScrollProgressBar({
     const updateScrollProgress = () => {
       const scrollTop = window.scrollY
       const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      const scrollPercent = scrollTop / docHeight
-      setScrollProgress(scrollPercent)
+      setScrollProgress(scrollTop / docHeight)
     }
 
-    window.addEventListener("scroll", updateScrollProgress)
+    window.addEventListener("scroll", updateScrollProgress, { passive: true })
     return () => window.removeEventListener("scroll", updateScrollProgress)
   }, [])
 
   return (
-    <div className={`fixed bottom-1 left-1 right-1 h-[1px] z-50 ${className}`} style={{ height: "1px" }}>
+    <div className={`fixed bottom-1 left-1 right-1 z-50 ${className}`} style={{ height: "1px" }}>
       <div
         className="h-full transition-all duration-100 ease-out"
         style={{
@@ -422,7 +289,6 @@ export function ScrollProgressBar({
   )
 }
 
-// Animated counter with easing
 export function SmoothCounter({
   value,
   duration = 2,
@@ -443,6 +309,7 @@ export function SmoothCounter({
   const controls = useAnimation()
 
   useEffect(() => {
+    const currentRef = ref.current
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -451,11 +318,14 @@ export function SmoothCounter({
           let startTime: number
           let animationFrame: number
 
+          const easeOutExpo = (x: number): number => {
+            return x === 1 ? 1 : 1 - Math.pow(2, -10 * x)
+          }
+
           const updateValue = (timestamp: number) => {
             if (!startTime) startTime = timestamp
             const progress = Math.min((timestamp - startTime) / (duration * 1000), 1)
-            const easedProgress = easeOutExpo(progress)
-            setDisplayValue(easedProgress * value)
+            setDisplayValue(easeOutExpo(progress) * value)
 
             if (progress < 1) {
               animationFrame = requestAnimationFrame(updateValue)
@@ -463,6 +333,7 @@ export function SmoothCounter({
           }
 
           animationFrame = requestAnimationFrame(updateValue)
+          observer.unobserve(entry.target)
 
           return () => cancelAnimationFrame(animationFrame)
         }
@@ -470,21 +341,16 @@ export function SmoothCounter({
       { threshold: 0.1 },
     )
 
-    if (ref.current) {
-      observer.observe(ref.current)
+    if (currentRef) {
+      observer.observe(currentRef)
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [controls, duration, value])
-
-  // Easing function for smooth counting
-  const easeOutExpo = (x: number): number => {
-    return x === 1 ? 1 : 1 - Math.pow(2, -10 * x)
-  }
 
   return (
     <motion.div ref={ref} className={className} initial={{ opacity: 0 }} animate={controls}>
@@ -495,7 +361,6 @@ export function SmoothCounter({
   )
 }
 
-// Hover card with 3D effect
 export function Card3D({
   children,
   className = "",
@@ -510,18 +375,11 @@ export function Card3D({
   const [scale, setScale] = useState(1)
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = e.currentTarget
-    const rect = card.getBoundingClientRect()
+    const rect = e.currentTarget.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
-    const mouseX = e.clientX
-    const mouseY = e.clientY
-
-    const rotateXValue = ((mouseY - centerY) / (rect.height / 2)) * -intensity
-    const rotateYValue = ((mouseX - centerX) / (rect.width / 2)) * intensity
-
-    setRotateX(rotateXValue)
-    setRotateY(rotateYValue)
+    setRotateX(((e.clientY - centerY) / (rect.height / 2)) * -intensity)
+    setRotateY(((e.clientX - centerX) / (rect.width / 2)) * intensity)
     setScale(1.02)
   }
 
@@ -534,14 +392,8 @@ export function Card3D({
   return (
     <motion.div
       className={`relative transform-gpu ${className}`}
-      style={{
-        transformStyle: "preserve-3d",
-      }}
-      animate={{
-        rotateX: rotateX,
-        rotateY: rotateY,
-        scale: scale,
-      }}
+      style={{ transformStyle: "preserve-3d" }}
+      animate={{ rotateX, rotateY, scale }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -551,7 +403,6 @@ export function Card3D({
   )
 }
 
-// Animated button with ripple effect
 export function RippleButton({
   children,
   className = "",
@@ -564,23 +415,21 @@ export function RippleButton({
   const [ripples, setRipples] = useState<{ x: number; y: number; id: number }[]>([])
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const button = e.currentTarget
-    const rect = button.getBoundingClientRect()
+    const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
     const id = Date.now()
 
-    setRipples([...ripples, { x, y, id }])
-
+    setRipples((prev) => [...prev, { x, y, id }])
     setTimeout(() => {
-      setRipples((ripples) => ripples.filter((ripple) => ripple.id !== id))
+      setRipples((prev) => prev.filter((ripple) => ripple.id !== id))
     }, 1000)
 
     if (onClick) onClick()
   }
 
   return (
-    <button className={`relative overflow-hidden ${className}`} onClick={handleClick}>
+    <button type="button" className={`relative overflow-hidden ${className}`} onClick={handleClick}>
       {ripples.map((ripple) => (
         <motion.span
           key={ripple.id}
@@ -596,64 +445,12 @@ export function RippleButton({
   )
 }
 
-// Animated hamburger menu icon
-export function AnimatedMenuIcon({
-  isOpen,
-  toggle,
-  className = "",
-}: {
-  isOpen: boolean
-  toggle: () => void
-  className?: string
-}) {
-  return (
-    <button
-      className={`relative w-10 h-10 flex items-center justify-center ${className}`}
-      onClick={toggle}
-      aria-label={isOpen ? "Close menu" : "Open menu"}
-    >
-      <motion.span
-        className="absolute w-6 h-0.5 bg-foreground"
-        animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 0 : -4 }}
-        transition={{ duration: 0.3 }}
-      />
-      <motion.span
-        className="absolute w-6 h-0.5 bg-foreground"
-        animate={{ opacity: isOpen ? 0 : 1 }}
-        transition={{ duration: 0.3 }}
-      />
-      <motion.span
-        className="absolute w-6 h-0.5 bg-foreground"
-        animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? 0 : 4 }}
-        transition={{ duration: 0.3 }}
-      />
-    </button>
-  )
-}
-
-// Animated page transition
-export function PageTransition({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
-      {children}
-    </motion.div>
-  )
-}
-
-// Animated section divider
-export function AnimatedDivider({
-  className = "",
-}: {
-  className?: string
-}) {
+export function AnimatedDivider({ className = "" }: { className?: string }) {
   const controls = useAnimation()
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const currentRef = ref.current
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -664,13 +461,13 @@ export function AnimatedDivider({
       { threshold: 0.1 },
     )
 
-    if (ref.current) {
-      observer.observe(ref.current)
+    if (currentRef) {
+      observer.observe(currentRef)
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
+      if (currentRef) {
+        observer.unobserve(currentRef)
       }
     }
   }, [controls])
@@ -686,22 +483,3 @@ export function AnimatedDivider({
     />
   )
 }
-
-// Add these styles to globals.css
-export const globalStyles = `
-@keyframes gradient-x {
-0% {
-  background-position: 0% 50%;
-}
-50% {
-  background-position: 100% 50%;
-}
-100% {
-  background-position: 0% 50%;
-}
-}
-
-.animate-gradient-x {
-animation: gradient-x 8s ease infinite;
-}
-`

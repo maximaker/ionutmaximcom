@@ -9,8 +9,8 @@ export function ResultsSection() {
   return (
     <SectionLayout
       badge="RESULTS"
-      title={<CharacterReveal text="Proven Results" />}
-      subtitle="Delivering measurable outcomes that help businesses grow and succeed online."
+      title={<CharacterReveal text="Impact at Scale" />}
+      subtitle="Over a decade of designing digital experiences across industries and continents."
     >
       <StaggeredFadeIn staggerDelay={0.15}>
         <ResultsShowcase />

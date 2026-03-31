@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { createPortal } from "react-dom"
 import { X, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -150,11 +151,17 @@ export default function Header() {
             <div className="flex items-center justify-between h-16 mb-8">
               <Link
                 href="/"
-                className="font-light text-xl tracking-wider text-foreground focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
+                className="focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
                 aria-label="Home - Ionut Maxim"
                 onClick={() => setMenuOpen(false)}
               >
-                ionut<span className="text-accent">maxim</span>
+                <Image
+                  src="/images/logo-white.svg"
+                  alt="Ionut Maxim"
+                  width={100}
+                  height={39}
+                  className="h-8 w-auto brightness-[0.85] dark:brightness-100"
+                />
               </Link>
               <button
                 onClick={() => setMenuOpen(false)}
@@ -237,28 +244,34 @@ export default function Header() {
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className={`transition-all duration-300 w-full ${
           scrolled
-            ? "sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80"
+            ? "sticky top-0 z-40 border-b border-border/30 bg-background/90 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70"
             : "sticky top-0 z-40 bg-transparent"
         }`}
         role="banner"
       >
-        <div className="container flex h-20 items-center justify-between">
+        <div className="container flex h-16 items-center justify-between">
           <Link
             href="/"
-            className="font-light text-xl tracking-wider text-foreground group focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
+            className="group focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
             aria-label="Home - Ionut Maxim"
           >
-            <span className="inline-block transition-transform group-hover:translate-x-1">ionut</span>
-            <span className="text-accent inline-block transition-transform group-hover:translate-x-1">maxim</span>
+            <Image
+              src="/images/logo-white.svg"
+              alt="Ionut Maxim"
+              width={100}
+              height={39}
+              className="h-7 w-auto transition-opacity group-hover:opacity-80 dark:invert-0 invert"
+              priority
+            />
           </Link>
 
           {/* Desktop navigation */}
-          <nav className="hidden md:flex gap-8" aria-label="Main navigation">
+          <nav className="hidden md:flex gap-6 lg:gap-10" aria-label="Main navigation">
             {NAV_LINKS.map((item) => (
               <SmoothScrollLink
                 key={item.name}
                 to={item.href}
-                className={`text-sm font-medium tracking-wide relative py-2 px-1 focus:outline-none focus:ring-2 focus:ring-accent rounded-sm transition-colors ${
+                className={`text-[13px] tracking-wide relative py-2 focus:outline-none focus:ring-2 focus:ring-accent rounded-sm transition-colors ${
                   activeSection === item.href.substring(1)
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -269,7 +282,7 @@ export default function Header() {
                   {item.name}
                   {activeSection === item.href.substring(1) && (
                     <motion.span
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent"
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
                       layoutId="activeSection"
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
@@ -280,17 +293,15 @@ export default function Header() {
           </nav>
 
           {/* Desktop CTA button */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-5">
             <ThemeToggle className="focus:outline-none focus:ring-2 focus:ring-accent" />
             <Button
-              className="btn-primary rounded-md font-medium tracking-wide px-6 py-2 h-10 relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+              className="bg-transparent border border-accent/40 text-accent hover:bg-accent hover:text-accent-foreground rounded-none font-light tracking-widest text-[12px] uppercase px-6 py-2 h-9 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
               asChild
             >
-              <Link href="#contact" className="flex items-center">
+              <Link href="#contact" className="flex items-center gap-2">
                 <span className="relative z-10">Get a Quote</span>
-                <span className="inline-block ml-2 relative z-10 transition-transform group-hover:translate-x-1">
-                  →
-                </span>
+                <span className="relative z-10">→</span>
               </Link>
             </Button>
           </div>

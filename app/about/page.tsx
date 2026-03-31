@@ -1,9 +1,14 @@
-"use client"
+import type { Metadata } from "next"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
+import { SectionLayout } from "../components/section-layout"
+import { LucideSmile, LucideBookOpen, LucideAward, LucideUsers, LucideRocket, LucideHeart } from "lucide-react"
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { SectionLayout } from "../components/section-layout";
-import { LucideSmile, LucideBookOpen, LucideAward, LucideUsers, LucideRocket, LucideHeart } from "lucide-react";
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn about Ionut Maxim — a passionate designer and developer with 8+ years of experience creating digital experiences that drive results.",
+}
 
 export default function AboutPage() {
   return (
@@ -129,7 +134,7 @@ export default function AboutPage() {
         {/* Let's Connect */}
         <SectionLayout title="Let's Connect" subtitle="Interested in working together or just want to say hello?" divider>
           <div className="flex flex-col items-center gap-6">
-            <a href="mailto:ionut@example.com" className="btn-primary rounded-none font-light tracking-wider px-8 py-4 h-auto relative overflow-hidden group text-lg">
+            <a href="mailto:hello@ionutmaxim.com" className="btn-primary rounded-none font-light tracking-wider px-8 py-4 h-auto relative overflow-hidden group text-lg">
               Get in Touch
             </a>
           </div>

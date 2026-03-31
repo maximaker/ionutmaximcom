@@ -1,11 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { GlassCard } from "@/components/ui/glass-card"
-import { Tooltip, TooltipProvider } from "@/components/ui/tooltip"
-import { AnimatedCounter } from "@/components/animated-counter"
+import { Tooltip as TooltipRoot, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip"
+import { AnimatedCounter } from "./micro-interactions"
+
+function SimpleTooltip({ children, content }: { children: React.ReactNode; content: string }) {
+  return (
+    <TooltipRoot>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipContent>{content}</TooltipContent>
+    </TooltipRoot>
+  )
+}
 
 export function EnhancedProjectCalculator() {
   const [projectType, setProjectType] = useState("")
@@ -163,7 +172,7 @@ export function EnhancedProjectCalculator() {
                 { id: "mobile-app", label: "Mobile App", tooltip: "Native or hybrid mobile application" },
                 { id: "web-app", label: "Web Application", tooltip: "Complex web-based software application" },
               ].map((type) => (
-                <Tooltip key={type.id} content={type.tooltip}>
+                <SimpleTooltip key={type.id} content={type.tooltip}>
                   <motion.button
                     type="button"
                     onClick={() => setProjectType(type.id)}
@@ -181,7 +190,7 @@ export function EnhancedProjectCalculator() {
                       />
                     )}
                   </motion.button>
-                </Tooltip>
+                </SimpleTooltip>
               ))}
             </div>
             {projectType && (
@@ -207,7 +216,7 @@ export function EnhancedProjectCalculator() {
               </label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {getFeatureOptions().map((feature) => (
-                  <Tooltip key={feature.id} content={feature.tooltip}>
+                  <SimpleTooltip key={feature.id} content={feature.tooltip}>
                     <motion.button
                       type="button"
                       onClick={() => handleFeatureToggle(feature.id)}
@@ -226,7 +235,7 @@ export function EnhancedProjectCalculator() {
                         )}
                       </AnimatePresence>
                     </motion.button>
-                  </Tooltip>
+                  </SimpleTooltip>
                 ))}
               </div>
               {features.length > 0 && (
@@ -254,7 +263,7 @@ export function EnhancedProjectCalculator() {
                   { id: "standard", label: "Standard (4-8 weeks)", tooltip: "Balanced timeline with regular updates" },
                   { id: "rush", label: "Rush (2-4 weeks)", tooltip: "Expedited timeline with priority attention" },
                 ].map((option) => (
-                  <Tooltip key={option.id} content={option.tooltip}>
+                  <SimpleTooltip key={option.id} content={option.tooltip}>
                     <motion.button
                       type="button"
                       onClick={() => setTimeline(option.id)}
@@ -272,7 +281,7 @@ export function EnhancedProjectCalculator() {
                         />
                       )}
                     </motion.button>
-                  </Tooltip>
+                  </SimpleTooltip>
                 ))}
               </div>
             </motion.div>

@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Card3D } from "./advanced-interactions"
 import { SectionLayout } from "./section-layout"
 import { StaggeredFadeIn } from "./advanced-interactions"
 import { X } from "lucide-react"
@@ -48,23 +47,21 @@ export function FAQSection() {
       divider
     >
       <div className="space-y-12">
-        <StaggeredFadeIn className="grid gap-8" staggerDelay={0.1}>
+        <StaggeredFadeIn className="grid gap-0" staggerDelay={0.08}>
           {faqs.map((faq, index) => (
-            <Card3D key={index} className="h-full">
-              <div className="card-style py-8 h-full">
-                <h3 className="heading-3 mb-4">{faq.question}</h3>
-                <p className="text-body">{faq.answer}</p>
-              </div>
-            </Card3D>
+            <div key={index} className="py-8 border-b border-border/20 last:border-b-0">
+              <h3 className="text-foreground font-light text-base md:text-lg mb-3">{faq.question}</h3>
+              <p className="text-muted-foreground text-sm font-light leading-relaxed max-w-2xl">{faq.answer}</p>
+            </div>
           ))}
         </StaggeredFadeIn>
 
-        <div className="text-left">
+        <div className="text-left pt-4">
           <button
             onClick={() => setIsFormOpen(true)}
-            className="text-accent hover:text-accent/80 transition-colors flex items-center gap-2 text-lg"
+            className="text-accent hover:text-accent/80 transition-colors flex items-center gap-2 text-sm font-light tracking-wide"
           >
-            Don't see your question? Ask me directly →
+            Don&apos;t see your question? Ask me directly →
           </button>
         </div>
 

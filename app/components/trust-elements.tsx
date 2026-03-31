@@ -27,18 +27,18 @@ export function TrustBadges() {
 
 export function ResultsShowcase() {
   const results = [
-    { metric: "35%", description: "Average conversion increase" },
-    { metric: "40%", description: "User engagement improvement" },
-    { metric: "50+", description: "Successful projects" },
-    { metric: "100%", description: "Client satisfaction" },
+    { metric: "70+", description: "Products shipped" },
+    { metric: "50+", description: "Clients served" },
+    { metric: "10M+", description: "Users of my designs" },
+    { metric: "100+", description: "Brands designed for" },
   ]
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 w-full">
+    <div className="grid grid-cols-2 gap-6 md:gap-8 w-full">
       {results.map((item, index) => (
-        <div key={index} className="card-style py-4 content-spacing-sm w-full">
-          <div className="text-3xl md:text-4xl font-light text-accent mb-2">{item.metric}</div>
-          <p className="text-muted-foreground text-sm font-light">{item.description}</p>
+        <div key={index} className="stat-card w-full group">
+          <div className="stat-value text-accent group-hover:text-foreground transition-colors">{item.metric}</div>
+          <span className="stat-label">{item.description}</span>
         </div>
       ))}
     </div>
@@ -121,28 +121,23 @@ export function PersonalStory() {
       <div className="flex flex-col md:flex-row gap-8 items-center w-full max-w-full overflow-x-hidden">
         <div className="md:w-1/3 w-full">
           <Image
-            src="/placeholder.svg?height=400&width=400"
-            alt="Ionut Maxim"
+            src="/images/portrait.webp"
+            alt="Ionut Maxim — Product & Experience Designer"
             width={300}
             height={300}
-            className="object-cover border border-border w-full max-w-full h-auto max-w-xs md:max-w-full mx-auto"
+            className="object-cover border border-border/20 w-full max-w-full h-auto max-w-xs md:max-w-full mx-auto"
           />
         </div>
         <div className="md:w-2/3 space-y-4 w-full">
           <h3 className="heading-3">My Journey</h3>
           <p className="text-body leading-relaxed">
-            With over 8 years of experience in design and development, my journey began with a passion for creating
-            digital experiences that feel natural and intuitive. I've worked with startups, established businesses, and
-            everything in between.
+            With over 22 years in the online industry and a decade focused on product & experience design, my journey started as a freelance web designer and evolved into architecting digital experiences for startups, SMBs, and established enterprises across Europe and North America.
           </p>
           <p className="text-body leading-relaxed">
-            My approach combines strategic thinking with creative execution. I believe that great design should not only
-            look beautiful but also drive measurable results for your business. Every project I take on is treated with
-            the same level of care and attention to detail.
+            My job is to make technology more human. I research, design, and develop bespoke solutions for each client&apos;s goals — surfacing key details by challenging core perspectives and asking sharp questions. When you work with me, you&apos;re talking directly to the strategist and the designer. No cookie cutting, no outsourcing.
           </p>
           <p className="text-body leading-relaxed">
-            I'm committed to continuous learning and staying at the forefront of design and development trends to
-            deliver cutting-edge solutions for my clients.
+            I&apos;m committed to continuous learning — it keeps me on top of the game and opens my mind to innovative ideas. Let your business goals dictate your technology, not the other way around.
           </p>
         </div>
       </div>
